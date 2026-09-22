@@ -45,7 +45,12 @@ p.lead { font-size: clamp(19px, 2vw, 22px); color: var(--t1); }
 .strap .one { font-family: var(--display); font-weight: 400; font-size: 1.5em; display: block; margin-top: 4px; text-transform: uppercase; }
 .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
 .fine { font-size: 13px; color: var(--t3); margin-top: 14px; }
-.device { background: #0b0a0e; border: 1px solid #3b3544; border-radius: 34px; padding: 18px; box-shadow: 0 40px 80px -30px #000; }
+.device { background: #0b0a0e; border: 1px solid #3b3544; border-radius: 30px; padding: 14px; box-shadow: 0 40px 80px -30px #000; }
+.device img { width: 100%; height: auto; border-radius: 16px; }
+.device-wrap { margin: 0; }
+.device-wrap figcaption, .gig figcaption { font-size: 12px; color: var(--t3); margin-top: 10px; text-align: center; }
+.gig { margin: 12px 0 0; }
+.gig img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
 .shot-slot { aspect-ratio: 1194 / 834; border-radius: 16px; border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; color: var(--t3); font-size: 14px; padding: 20px; background: var(--panel); }
 section.band { padding-block: 84px; border-top: 1px solid var(--line); }
 .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
