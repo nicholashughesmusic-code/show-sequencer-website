@@ -9,7 +9,7 @@ Every page in src/ may use:
 A page's first line may be <!-- title: ... | description: ... -->.
 The product name lives only in site.json, so renaming the product is a one-line change.
 """
-import json, os, re, shutil, sys
+import hashlib, json, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC, OUT = os.path.join(ROOT, "src"), os.path.join(ROOT, "_site")
@@ -22,6 +22,8 @@ def load_site():
     site["productUpper"] = name.upper()
     site["year"] = "2026"
     site.setdefault("basePath", "")
+    with open(os.path.join(ROOT, "assets", "css", "site.css"), "rb") as f:
+        site["cssVersion"] = hashlib.sha1(f.read()).hexdigest()[:10]
     return site
 
 def truthy(v):

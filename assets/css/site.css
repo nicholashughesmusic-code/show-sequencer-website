@@ -11,7 +11,7 @@
 html, body { background: var(--ink); color: var(--t1); }
 body { margin: 0; font-family: var(--body); font-size: 17px; line-height: 1.55; }
 a { color: inherit; }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 .preview-banner { background: #2a2006; color: #f6d88a; font-size: 13px; padding: 10px 16px; text-align: center; border-bottom: 1px solid #4a3a10; }
 .wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
 nav.top { position: sticky; top: 0; z-index: 5; background: rgba(22,19,28,.94); border-bottom: 1px solid var(--line); }
