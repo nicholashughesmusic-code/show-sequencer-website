@@ -21,6 +21,7 @@ def load_site():
     site["productFirstMention"] = name + (" (working name)" if site.get("productIsWorkingName") else "")
     site["productUpper"] = name.upper()
     site["year"] = "2026"
+    site.setdefault("basePath", "")
     return site
 
 def truthy(v):

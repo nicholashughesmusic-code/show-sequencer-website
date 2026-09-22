@@ -11,8 +11,8 @@ specifications live elsewhere and are never copied here.
 python3 build.py
 ```
 
-This writes the site to `_site/`. It needs only Python 3. Open `_site/index.html` through a local
-server so the root-relative links work:
+This writes the site to `_site/`. It needs only Python 3. Serve it locally with the base path
+set to an empty string in `site.json`, or preview it on GitHub Pages:
 
 ```bash
 python3 -m http.server --directory _site 8000
@@ -27,6 +27,8 @@ Everything that changes between now and launch lives in `site.json`:
 - `launched`: while `false`, every page carries `noindex`, `robots.txt` blocks crawlers and a
   preview banner shows
 - `siteUrl`: set to the custom domain (for example `https://show-arts.com`) to write the `CNAME` file
+- `basePath`: `/show-arts-website` while the site is served from GitHub's own address; set it to
+  an empty string once `siteUrl` is the custom domain
 
 ## Deploy
 

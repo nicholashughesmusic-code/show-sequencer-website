@@ -7,19 +7,19 @@
 <meta name="description" content="{{description}}">
 {{#unless launched}}<meta name="robots" content="noindex, nofollow">{{/unless}}
 <meta name="theme-color" content="#16131C">
-<link rel="preload" href="/assets/fonts/Anton-Regular.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="preload" href="{{basePath}}/assets/fonts/Anton-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="{{basePath}}/assets/css/site.css">
 </head>
 <body>
 {{#unless launched}}<div class="preview-banner">Preview. This site is not public yet, and nothing on it is final.</div>{{/unless}}
 <nav class="top" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/">SHOW <span>ARTS</span></a>
+    <a class="brand" href="{{basePath}}/">SHOW <span>ARTS</span></a>
     <div class="links">
-      <a href="/">Product</a>
-      <a href="/beta/">Beta</a>
+      <a href="{{basePath}}/">Product</a>
+      <a href="{{basePath}}/beta/">Beta</a>
       {{#if manualUrl}}<a href="{{manualUrl}}">Manual</a>{{/if}}
-      <a href="/about/">About</a>
+      <a href="{{basePath}}/about/">About</a>
       {{#if feedbackUrl}}<a href="{{feedbackUrl}}">Request a feature</a>{{/if}}
     </div>
   </div>
