@@ -1,0 +1,18 @@
+<!-- title: The beta - {{productName}} | description: Help shape {{productName}}, a show computer for iPad. Pre-release, through TestFlight. -->
+{{> head}}
+<div class="wrap page-head">
+  <div class="eyebrow">The beta</div>
+  <h1 style="font-size:clamp(44px,7vw,88px)">Help shape it.</h1>
+  <p class="lead">This is pre-release software. Things will change, some will break, and you should rehearse with it before you trust it at a show. We are mostly looking for people who play live regularly, and we cannot take everyone at once. We read every application.</p>
+  <div class="expect">
+    <div><b>TestFlight</b>Builds arrive through Apple's TestFlight on your iPad.</div>
+    <div><b>Bugs expected</b>It is a beta. Rehearse first.</div>
+    <div><b>Your say</b>Tell us what to build next, and help name it.</div>
+    <div><b>About two minutes</b>A short form about your show today.</div>
+  </div>
+</div>
+<div class="wrap prose">
+  {{#if betaFormUrl}}<div class="ctas"><a class="btn primary" href="{{betaFormUrl}}">Apply for the beta</a></div>{{/if}}
+  {{#unless betaFormUrl}}<div class="notice">Applications open soon. The form will ask what runs your show today, what it controls, and what else you have to run alongside it.</div>{{/unless}}
+</div>
+{{> foot}}

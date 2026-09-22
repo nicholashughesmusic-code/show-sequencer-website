@@ -1,0 +1,11 @@
+<!-- title: Contact - {{companyShort}} | description: Contact and support for {{productName}}. -->
+{{> head}}
+<div class="wrap page-head">
+  <div class="eyebrow">Contact and support</div>
+  <h1 style="font-size:clamp(44px,7vw,88px)">Contact</h1>
+</div>
+<div class="wrap prose">
+  {{#if contactEmail}}<p class="lead">Email <a href="mailto:{{contactEmail}}">{{contactEmail}}</a>. We reply within a few working days.</p>{{/if}}
+  {{#unless contactEmail}}<div class="notice">A support address is added here before the beta opens.</div>{{/unless}}
+</div>
+{{> foot}}

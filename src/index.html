@@ -1,0 +1,134 @@
+<!-- title: {{productName}} - your show doesn't need a laptop | description: {{productFirstMention}} runs the tracks, click, MIDI, video and lighting for a live show from one iPad. -->
+{{> head}}
+<header class="hero wrap">
+  <div class="grid">
+    <div>
+      <div class="working"><b>{{productUpper}}</b>{{#if productIsWorkingName}}<span>working name</span>{{/if}}</div>
+      <h1>Your show doesn't need <em>a laptop.</em></h1>
+      <div class="strap">Audio. Click. MIDI. Video. Lights.<span class="one">One iPad.</span></div>
+      <div class="ctas">
+        <a class="btn primary" href="/beta/">Join the beta</a>
+        <a class="btn ghost" href="#how">See how it works</a>
+      </div>
+      <p class="fine">Pre-release software, distributed through Apple's TestFlight.</p>
+    </div>
+    <div class="device"><div class="shot-slot">Screenshot to come: Showtime, the screen you play from</div></div>
+  </div>
+</header>
+
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="eyebrow">The problem</div>
+    <h2>A show is a lot of software.</h2>
+    <p class="lead">A lot of shows run on a laptop, a DAW, a playback app, something for video, something for lights and a box of MIDI adapters, all configured to agree with each other. Every piece is another thing to set up, update and check before doors.</p>
+    <div class="rig">
+      <div>
+        <div class="label">Today</div>
+        <div class="chips"><span class="chip">Laptop</span><span class="chip">DAW</span><span class="chip">Playback app</span><span class="chip">Video player</span><span class="chip">Lighting software</span><span class="chip">MIDI routing</span><span class="chip hw">Audio interface</span><span class="chip hw">Screen</span><span class="chip hw">DMX node</span></div>
+      </div>
+      <div class="vs">versus</div>
+      <div>
+        <div class="label">With {{productName}}</div>
+        <div class="chips"><span class="chip one">iPad + {{productName}}</span><span class="chip hw">Audio interface</span><span class="chip hw">Screen</span><span class="chip hw">DMX node</span></div>
+      </div>
+    </div>
+    <p>It replaces the software stack in the middle, not the hardware at the edges. You still bring your interface, your screens and your DMX node.</p>
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="wrap stack-lg">
+    <div class="eyebrow">One show clock</div>
+    <h2>Everything follows the audio.</h2>
+    <p class="lead">Video frames, MIDI messages and lighting cues are scheduled against the same position as the audio, so they stay where you put them. Line them up once and they play back in the same place every night.</p>
+    <div class="clock" role="img" aria-label="One audio clock drives audio and click, MIDI, video and lights">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="75" width="190" height="60" rx="10" fill="#2A2433" stroke="#F01010" stroke-width="2"/>
+        <text x="105" y="102" text-anchor="middle" fill="#F5F3F7" font-family="Anton, Impact, sans-serif" font-size="20">AUDIO CLOCK</text>
+        <text x="105" y="122" text-anchor="middle" fill="#B3ABBC" font-family="-apple-system, sans-serif" font-size="12">the show's one position</text>
+        <g stroke="#7E7689" stroke-width="2" fill="none"><path d="M200 105 C 290 105, 300 30, 400 30"/><path d="M200 105 C 290 105, 300 80, 400 80"/><path d="M200 105 C 290 105, 300 130, 400 130"/><path d="M200 105 C 290 105, 300 180, 400 180"/></g>
+        <g font-family="-apple-system, sans-serif" font-size="15">
+          <rect x="400" y="10" width="340" height="40" rx="8" fill="#1E1A25" stroke="#3A3342"/><text x="418" y="36" fill="#F5F3F7">Audio and click</text><text x="722" y="36" text-anchor="end" fill="#7E7689" font-size="12">up to 16 tracks, any bus</text>
+          <rect x="400" y="60" width="340" height="40" rx="8" fill="#1E1A25" stroke="#3A3342"/><text x="418" y="86" fill="#F5F3F7">MIDI</text><text x="722" y="86" text-anchor="end" fill="#7E7689" font-size="12">patch changes, automation</text>
+          <rect x="400" y="110" width="340" height="40" rx="8" fill="#1E1A25" stroke="#3A3342"/><text x="418" y="136" fill="#F5F3F7">Video</text><text x="722" y="136" text-anchor="end" fill="#7E7689" font-size="12">to the external screen</text>
+          <rect x="400" y="160" width="340" height="40" rx="8" fill="#1E1A25" stroke="#3A3342"/><text x="418" y="186" fill="#F5F3F7">Lights</text><text x="722" y="186" text-anchor="end" fill="#7E7689" font-size="12">Art-Net to your DMX node</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="stack-lg">
+      <div class="eyebrow">Built for the stage</div>
+      <h2>One screen to play from.</h2>
+      <p>Showtime is deliberately simple. The Play bar is big and never moves. You cue the next song first, then play it, so a stray tap does not start the wrong song.</p>
+      <ul class="ticks"><li>A Play bar that never moves</li><li>Cue, then play</li><li>Problems on the status bar, in plain words</li><li>Leaving asks whether to keep the show playing</li></ul>
+    </div>
+    <div class="device shot"><div class="shot-slot">Screenshot to come: a song cued, ready to play</div></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split flip">
+    <div class="device shot"><div class="shot-slot">Screenshot to come: the Tonight check</div></div>
+    <div class="stack-lg">
+      <div class="eyebrow">Know before you walk on</div>
+      <h2>Check the whole show before doors.</h2>
+      <p>The Tonight check looks at the loaded set and the rig: missing songs, the audio interface, where each output goes, the screen, MIDI, lighting, battery, free space and your curfew. Each problem links to where it is fixed.</p>
+      <ul class="ticks"><li>A line check for each output</li><li>The latest you can start and still make curfew</li><li>The things only you can check, listed to tick</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="stack-lg">
+      <div class="eyebrow">When something goes wrong</div>
+      <h2>Reliability includes recovery.</h2>
+      <p>If the app is interrupted, it comes back with your set loaded and stops at READY. It never starts playing on its own. You decide when the show carries on.</p>
+    </div>
+    <div class="device shot"><div class="shot-slot">Screenshot to come: READY after a relaunch</div></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="eyebrow">Around the stage</div>
+    <h2>Everyone on the same page.</h2>
+    <p class="lead">Band members follow along on their own phones and tablets, over your local network. No internet needed.</p>
+    <div class="cards">
+      <div class="card"><div class="who">For the band</div><h3>Phone remote</h3><p>Play, stop and cue from the side of the stage, plus a mixer for your own level.</p></div>
+      <div class="card"><div class="who">For players</div><h3>Stands</h3><p>Charts and PDF parts on a stand page that follows the show.</p></div>
+      <div class="card"><div class="who">For the crew</div><h3>Ready board</h3><p>Band, FOH, monitors and stage each say when they are set, and everyone sees it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack-lg" style="max-width:800px">
+    <div class="eyebrow">Designed at real gigs</div>
+    <h2>Made by a band that plays out.</h2>
+    <p class="lead">{{productName}} started with a band running tracks, Ableton, video, MIDI and lighting at real shows.</p>
+    <p>A fly-rig gig on an iPad showed how good a one-device show could be, and how much still had to run beside it. This app is the attempt to put the rest of the show on the same iPad.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap final">
+    <div class="card">
+      <div class="eyebrow">Join the beta</div>
+      <h2>Rehearse with it. Tell us what breaks.</h2>
+      <p>We are looking for people who rehearse and gig. Tell us what your rig looks like today.</p>
+      <div class="ctas"><a class="btn primary" href="/beta/">Apply for the beta</a></div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Not ready to test?</div>
+      <h3>Get product updates</h3>
+      {{#if updatesFormUrl}}<p>Occasional news, no more than monthly. Unsubscribe any time.</p><div class="ctas"><a class="btn ghost" href="{{updatesFormUrl}}">Sign up</a></div>{{/if}}
+      {{#unless updatesFormUrl}}<p>The updates list opens soon.</p>{{/unless}}
+    </div>
+  </div>
+</section>
+{{> foot}}
