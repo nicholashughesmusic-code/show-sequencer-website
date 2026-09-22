@@ -27,7 +27,7 @@ Everything that changes between now and launch lives in `site.json`:
 - `launched`: while `false`, every page carries `noindex`, `robots.txt` blocks crawlers and a
   preview banner shows
 - `siteUrl`: set to the custom domain (for example `https://show-arts.com`) to write the `CNAME` file
-- `basePath`: `/show-arts-website` while the site is served from GitHub's own address; set it to
+- `basePath`: `/show-sequencer-website` while the site is served from GitHub's own address; set it to
   an empty string once `siteUrl` is the custom domain
 
 ## Deploy
