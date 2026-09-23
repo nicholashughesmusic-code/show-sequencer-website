@@ -7,6 +7,8 @@ Every page in src/ may use:
   {{#if key}}...{{/if}}  kept only when site.json's key is true or non-empty
   {{#unless key}}...{{/unless}}  kept only when it is false or empty
 A page's first line may be <!-- title: ... | description: ... -->.
+A page builds to a folder named after its file, and a hyphen in that name becomes a
+further folder: feedback.html builds to /feedback/, feedback-thanks.html to /feedback/thanks/.
 The product name lives only in site.json, so renaming the product is a one-line change.
 """
 import hashlib, json, os, re, shutil, sys
@@ -62,7 +64,7 @@ def main():
         page["title"] = render(page["title"], site, page)
         page["description"] = render(page["description"], site, page)
         html = render(text, site, page)
-        target = os.path.join(OUT, "index.html" if name == "index.html" else ("404.html" if name == "404.html" else os.path.join(name[:-5], "index.html")))
+        target = os.path.join(OUT, "index.html" if name == "index.html" else ("404.html" if name == "404.html" else os.path.join(*name[:-5].split("-"), "index.html")))
         os.makedirs(os.path.dirname(target), exist_ok=True)
         with open(target, "w") as f:
             f.write(html)

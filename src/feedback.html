@@ -1,0 +1,94 @@
+<!-- title: Send feedback - {{productName}} | description: Tell us what broke, what confused you or what {{productName}} should do next. -->
+{{> head}}
+<div class="wrap page-head">
+  <div class="eyebrow">Feedback</div>
+  <h1 style="font-size:clamp(44px,7vw,88px)">Send us a report.</h1>
+  <p class="lead">Anything at all: a bug, a screen that made no sense, something you want it to do, or a piece of gear it would not talk to. Small things are worth sending. A lot of them turn out to be the same thing.</p>
+</div>
+<div class="wrap prose">
+  <p>Fill in what you can. Only the first five are needed, and the rest help if you have them. Everything goes straight to the person building it.</p>
+  <form class="report" id="report" action="https://formspree.io/f/mwlpbvyg" method="POST">
+    <input type="hidden" name="_subject" value="{{productName}} feedback from the site">
+    <input type="hidden" name="_next" value="{{siteOrigin}}{{basePath}}/feedback/thanks/">
+    <p class="hp" aria-hidden="true"><label for="gotcha">Leave this empty</label><input id="gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></p>
+
+    <div class="field">
+      <label for="name">Your name</label>
+      <input id="name" type="text" name="name" autocomplete="name" required>
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <p class="hint">So we can come back to you about it.</p>
+      <input id="email" type="email" name="email" autocomplete="email" inputmode="email" required>
+    </div>
+
+    <fieldset class="choice">
+      <legend>What kind of thing is this?</legend>
+      <div class="options">
+        <label><input type="radio" name="kind" value="Bug" required><span>Bug</span></label>
+        <label><input type="radio" name="kind" value="Something confusing"><span>Something confusing</span></label>
+        <label><input type="radio" name="kind" value="Feature request"><span>Feature request</span></label>
+        <label><input type="radio" name="kind" value="Hardware compatibility"><span>Hardware compatibility</span></label>
+        <label><input type="radio" name="kind" value="Other"><span>Other</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="doing">What were you doing?</label>
+      <p class="hint">The screen you were on and what you had just tapped.</p>
+      <textarea id="doing" name="doing" rows="3" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="happened">What happened?</label>
+      <textarea id="happened" name="happened" rows="4" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="expected">What did you expect? <span class="opt">(optional)</span></label>
+      <textarea id="expected" name="expected" rows="3"></textarea>
+    </div>
+
+    <fieldset class="choice">
+      <legend>Did this happen at a real show?</legend>
+      <div class="options">
+        <label><input type="radio" name="at-a-show" value="Yes" required><span>Yes</span></label>
+        <label><input type="radio" name="at-a-show" value="No"><span>No</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="choice">
+      <legend>Could you carry on with the show?</legend>
+      <div class="options">
+        <label><input type="radio" name="carried-on" value="Yes"><span>Yes</span></label>
+        <label><input type="radio" name="carried-on" value="No"><span>No</span></label>
+        <label><input type="radio" name="carried-on" value="Not applicable"><span>Not applicable</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="rig">Anything about your rig we should know? <span class="opt">(optional)</span></label>
+      <p class="hint">iPad model, iPadOS version, audio interface, anything on MIDI, the screen you send video to, your DMX node.</p>
+      <textarea id="rig" name="rig" rows="3"></textarea>
+    </div>
+
+    <button class="btn primary" id="send" type="submit">Send the report</button>
+  </form>
+  <p class="fine">We use what you send to fix the app and to reply to you about it, and for nothing else. See <a href="{{basePath}}/privacy/">Privacy</a>.</p>
+</div>
+<script>
+(function () {
+  var form = document.getElementById("report");
+  var button = document.getElementById("send");
+  if (!form || !button) { return; }
+  var sending = false;
+  form.addEventListener("submit", function (event) {
+    if (sending) { event.preventDefault(); return; }
+    sending = true;
+    button.setAttribute("aria-disabled", "true");
+    button.textContent = "Sending...";
+  });
+})();
+</script>
+{{> foot}}

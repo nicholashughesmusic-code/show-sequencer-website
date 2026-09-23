@@ -1,18 +1,78 @@
-<!-- title: The beta - {{productName}} | description: Help shape {{productName}}, a show computer for iPad. Pre-release, through TestFlight. -->
+<!-- title: The beta - {{productName}} | description: Help shape {{productName}}, a show computer for iPad. Pre-release, through TestFlight, and what we ask of a tester. -->
 {{> head}}
 <div class="wrap page-head">
   <div class="eyebrow">The beta</div>
   <h1 style="font-size:clamp(44px,7vw,88px)">Help shape it.</h1>
-  <p class="lead">This is pre-release software. Things will change, some will break, and you should rehearse with it before you trust it at a show. We are mostly looking for people who play live regularly, and we cannot take everyone at once. We read every application.</p>
+  <p class="lead">{{productFirstMention}} is pre-release software. Things will change, some will break, and the people testing it decide what gets built next. We take testers in small groups rather than all at once, so that every report gets answered properly.</p>
   <div class="expect">
     <div><b>TestFlight</b>Builds arrive through Apple's TestFlight on your iPad.</div>
-    <div><b>Bugs expected</b>It is a beta. Rehearse first.</div>
+    <div><b>Bugs expected</b>It is a beta. Rehearse with it first.</div>
     <div><b>Your say</b>Tell us what to build next, and help name it.</div>
-    <div><b>About two minutes</b>A short form about your show today.</div>
+    <div><b>Small groups</b>We take people on a few at a time.</div>
   </div>
 </div>
-<div class="wrap prose">
-  {{#if betaFormUrl}}<div class="ctas"><a class="btn primary" href="{{betaFormUrl}}">Apply for the beta</a></div>{{/if}}
-  {{#unless betaFormUrl}}<div class="notice">Applications open soon. The form will ask what runs your show today, what it controls, and what else you have to run alongside it.</div>{{/unless}}
-</div>
+
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="eyebrow">The commitment</div>
+    <h2>What We Ask of a Tester</h2>
+    <p class="lead">None of this is onerous, and all of it matters. It is the difference between a beta that finds problems in a rehearsal room and one that finds them in front of an audience.</p>
+    <ul class="ticks">
+      <li>Put it through a rehearsal before you trust it at a show, every time there is a new build.</li>
+      <li>Tell us when something goes wrong, even when it looks small or you are not sure it was the app.</li>
+      <li>Send the report from the device while it is fresh, rather than describing it from memory a week later.</li>
+      <li>Say what your rig is: the iPad, the interface, anything on MIDI, the screen, the DMX node.</li>
+      <li>Expect questions back, and the odd request to try one specific thing and tell us what it did.</li>
+      <li>Never risk a real show on unfinished software. If in doubt, run the show the way you already know works.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="eyebrow">In return</div>
+    <h2>What You Get Back</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="who">Early access</div>
+        <p>Every build as it is made, long before any of it reaches an App Store.</p>
+      </div>
+      <div class="card">
+        <div class="who">A direct line</div>
+        <p>You are talking to the person writing the code, not a support queue in front of him.</p>
+      </div>
+      <div class="card">
+        <div class="who">Real influence</div>
+        <p>Whole screens in the app exist because a tester said the old one did not work at the kit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack-lg">
+    <div class="eyebrow">Reporting</div>
+    <h2>How to Send a Report</h2>
+    <p class="lead">The app can send a report itself, with what it was doing at the time already filled in. That is always better than a description written from memory, because it carries the detail nobody remembers to mention.</p>
+    <div class="split" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px">
+      <figure class="device-wrap">
+        <div class="device"><div class="shot-slot">Screenshot to come: where the report button lives in the app</div></div>
+        <figcaption>Where the report button lives</figcaption>
+      </figure>
+      <figure class="device-wrap">
+        <div class="device"><div class="shot-slot">Screenshot to come: the report itself, ready to send from the device</div></div>
+        <figcaption>The report, ready to send from the device</figcaption>
+      </figure>
+    </div>
+    <p>Anything that is not a report from the device, a feature you want, a screen that made no sense, a piece of gear that would not talk to it, comes through the form on this site instead.</p>
+    <div class="ctas"><a class="btn ghost" href="{{basePath}}/feedback/">Send feedback</a></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap prose">
+    {{#if betaFormUrl}}<div class="ctas"><a class="btn primary" href="{{betaFormUrl}}">Apply for the beta</a></div>{{/if}}
+    {{#unless betaFormUrl}}<div class="notice">Applications open soon. Until then, if you play live regularly and want to be in the first group, say so through <a href="{{basePath}}/feedback/">the feedback form</a> and we will come back to you when it opens.</div>{{/unless}}
+  </div>
+</section>
 {{> foot}}

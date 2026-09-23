@@ -11,6 +11,10 @@ specifications live elsewhere and are never copied here.
 python3 build.py
 ```
 
+Each page in `src/` builds to a folder named after its file, and a hyphen in that name becomes a
+further folder: `feedback.html` builds to `/feedback/`, and `feedback-thanks.html` to
+`/feedback/thanks/`.
+
 This writes the site to `_site/`. It needs only Python 3. Serve it locally with the base path
 set to an empty string in `site.json`, or preview it on GitHub Pages:
 
@@ -23,12 +27,15 @@ python3 -m http.server --directory _site 8000
 Everything that changes between now and launch lives in `site.json`:
 
 - `productName` and `productIsWorkingName`: the product's name everywhere on the site
-- `betaFormUrl`, `updatesFormUrl`, `feedbackUrl`, `manualUrl`, `contactEmail`: shown only once set
+- `betaFormUrl`, `updatesFormUrl`, `manualUrl`, `contactEmail`: shown only once set
 - `launched`: while `false`, every page carries `noindex`, `robots.txt` blocks crawlers and a
   preview banner shows
 - `siteUrl`: set to the custom domain (for example `https://show-arts.com`) to write the `CNAME` file
 - `basePath`: `/show-sequencer-website` while the site is served from GitHub's own address; set it to
   an empty string once `siteUrl` is the custom domain
+- `siteOrigin`: the origin the site is served from, used where a link has to leave the site and come
+  back as a full URL (the feedback form's redirect after sending). It changes at the same time as
+  `siteUrl` and `basePath`
 
 ## Deploy
 
