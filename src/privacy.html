@@ -5,14 +5,35 @@
   <h1 style="font-size:clamp(44px,7vw,88px)">Privacy</h1>
 </div>
 <div class="wrap prose">
-  <div class="notice">Draft. This notice is completed before any form, mailing list or analytics on this site goes live.</div>
+  <p class="lead">Short version: the only information collected here is what you type into a form and send. Nothing about your songs, your sets or your shows leaves your iPad.</p>
+
+  <h2 id="who">Who holds it</h2>
+  <p>{{companyShort}} is a working name used by Nick Hughes, who is the person responsible for any information collected through this site. A limited company, {{companyName}}, is being registered; when it exists it takes over that responsibility and this page will say so.</p>
+  {{#if contactEmail}}<p>To ask what is held about you, to have it corrected, or to have it deleted, email <a href="mailto:{{contactEmail}}">{{contactEmail}}</a>.</p>{{/if}}
+  {{#unless contactEmail}}<div class="notice">A contact address for these requests is added here before the feedback form is announced.</div>{{/unless}}
+
   <h2 id="site">This site</h2>
-  <p>This site sets no cookies and does not track you for advertising.</p>
+  <p>This site sets no cookies, runs no analytics and does not track you for advertising. It is a set of static pages served by GitHub Pages, which keeps its own short-lived server logs, including visitors' IP addresses, to run the service and defend it from abuse.</p>
+
+  <h2 id="feedback">The feedback form</h2>
+  <p>The form asks for your name, your email address, what kind of problem it is, what you were doing, what happened, what you expected, whether it happened at a real show, whether you could carry on, and anything you want to say about your rig. All of it is what you choose to type.</p>
+  <p>It is collected so a problem can be understood and fixed, and so you can be asked a question back. Nothing is used to advertise to you, and nothing is sold or passed to anyone else.</p>
+  <p>The form is handled by <a href="https://formspree.io/legal/privacy-policy/">Formspree</a>, a form service in the United States, which stores each submission and emails it on. Submissions are kept only while they are useful, in practice until the problem is resolved or the beta ends, and can be deleted sooner if you ask.</p>
+
   <h2 id="beta">The beta</h2>
-  <p>To be completed: what the beta application asks, who processes it, how long it is kept and how to have it deleted.</p>
+  <p>Applications are not open yet. When they are, this page will say exactly what the application asks, why, and how long it is kept, before the form takes a single answer.</p>
+
   <h2 id="updates">Product updates</h2>
-  <p>To be completed.</p>
+  <p>There is no mailing list. If one is added, joining it will be a separate, deliberate choice, never a side effect of applying to the beta or sending feedback, and this page will describe it first.</p>
+
   <h2 id="app">The app</h2>
-  <p>To be completed. The app never collects your songs, set names, audio, video, lyrics or charts.</p>
+  <p>{{productName}} keeps your songs, sets, audio, video, lyrics and charts on your own iPad. None of it is uploaded, and none of it reaches {{companyShort}}.</p>
+  <p>The app can build a report about your rig for you to send when something goes wrong: your iPad model, its system version, the audio device and how it is set up, what else is connected, and the app's own diagnostic log. You read the whole report before it is sent, it names no song, set or file, and nothing leaves the iPad unless you send it yourself.</p>
+  <p>The app also has a setting for sharing anonymous diagnostics about how shows ran. It is off unless you turn it on, it never records song, set or file names, audio, video, lyrics or anything you typed, and in this build nothing is sent anywhere.</p>
+
+  <h2 id="rights">Your rights</h2>
+  <p>You can ask what is held about you, ask for it to be corrected or deleted, and withdraw anything you have agreed to. Ask using the address above. If you are unhappy with the answer, you can complain to the UK's Information Commissioner's Office at <a href="https://ico.org.uk/">ico.org.uk</a>.</p>
+
+  <p class="muted">Last updated 23 September 2026.</p>
 </div>
 {{> foot}}
