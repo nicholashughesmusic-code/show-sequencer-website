@@ -47,6 +47,13 @@ domain is `showart` singular.
 domain and start redirecting the `github.io` address to it, so doing that before DNS resolves
 takes the working site down rather than moving it.
 
+**Forwarding is not this.** GoDaddy's "Domain connection" and "Forwarding" both answer with their
+own servers (`15.197.225.128`, `3.33.251.168`) and send a 301 to a single target URL. The front
+door works, and nothing underneath it does: the target is one fixed address, so
+`showarttechnologies.com/guide/` is a 404 rather than the guide, and the address bar shows the
+`github.io` URL once redirected. Remove the forwarding before adding the records below - a domain
+cannot do both.
+
 In GoDaddy's DNS panel, on the apex record (`@`), replace whatever is parked there with these four
 A records, all four of them:
 
@@ -72,8 +79,8 @@ And one CNAME so `www` works too:
 www  ->  nicholashughesmusic-code.github.io
 ```
 
-Check it has taken with `dig +short showarttechnologies.com` - the four GitHub addresses rather
-than the parked ones. Then set three values in `site.json` together, as the section above
+Check it has taken with `dig +short showarttechnologies.com` - the four `185.199.*` GitHub
+addresses, not the parked ones and not GoDaddy's forwarders. Then set three values in `site.json` together, as the section above
 describes, and push:
 
 ```json
