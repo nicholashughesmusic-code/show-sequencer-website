@@ -10,6 +10,7 @@
   "basePath": "/show-sequencer-website",
   "betaFormUrl": "",
   "updatesFormUrl": "",
-  "manualUrl": "/show-sequencer-website/guide/",
-  "contactEmail": "nickhughesmusic@outlook.com"
+  "manualUrl": "/show-sequencer-website/manual/",
+  "contactEmail": "nickhughesmusic@outlook.com",
+  "guideUrl": "/show-sequencer-website/guide/"
 }

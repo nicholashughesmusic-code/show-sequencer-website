@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Show Sequencer — The Manual</title>
+<style>
+  :root {
+    --ink: #14121a; --ink-soft: #3d3848; --ink-faint: #6f697d;
+    --rule: #d8d4de; --panel: #f5f3f7; --accent: #c4141f; --go: #1b6b2d; --warn: #9a6a00;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink);
+    font: 11.4pt/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .book { max-width: 190mm; margin: 0 auto; padding: 0 6mm; }
+  h1, h2, h3, h4 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  h1 { font-size: 30pt; line-height: 1.05; letter-spacing: -0.4pt; margin: 0 0 6pt; text-transform: uppercase; font-weight: 800; font-stretch: condensed; }
+  h2 { font-size: 19pt; margin: 0 0 4pt; font-weight: 800; text-transform: uppercase; font-stretch: condensed; letter-spacing: -0.2pt; }
+  h3 { font-size: 12.5pt; margin: 16pt 0 4pt; font-weight: 700; }
+  h4 { font-size: 11pt; margin: 12pt 0 3pt; font-weight: 700; color: var(--ink-soft); }
+  p, li, td, th { orphans: 2; widows: 2; }
+  ol, ul { padding-left: 18pt; margin: 6pt 0; }
+  li { margin: 3pt 0; }
+  code { background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: 0 3px; font-size: 9.6pt; }
+  .chapter { page-break-before: always; break-before: page; padding-top: 4mm; }
+  .chapter-head { border-bottom: 2.5pt solid var(--accent); padding-bottom: 6pt; margin-bottom: 12pt; }
+  .chapter-num { font-size: 9pt; letter-spacing: 2pt; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .lede { color: var(--ink-soft); font-size: 12pt; margin: 0 0 10pt; }
+  figure { margin: 12pt 0; page-break-inside: avoid; break-inside: avoid; }
+  /* Wide screenshots fill the column; tall close-ups (a fader strip is far taller than it is
+     wide) are held to a height that fits a page instead of being blown up to full width. */
+  figure img {
+    max-width: 100%; width: auto; max-height: 130mm; height: auto;
+    border: 1px solid var(--rule); border-radius: 4px; display: block; margin: 0 auto;
+  }
+  figure.half img { max-width: 62%; max-height: 95mm; }
+  .placeholder { border: 1.5pt dashed var(--rule); border-radius: 4px; padding: 22pt 14pt;
+    text-align: center; color: var(--ink-faint); font-size: 10pt; background: var(--panel); }
+  figcaption { font-size: 9.2pt; color: var(--ink-faint); margin-top: 4pt; }
+  figcaption b { color: var(--ink-soft); }
+  .steps { counter-reset: step; list-style: none; padding-left: 0; }
+  .steps > li { counter-increment: step; position: relative; padding-left: 26pt; margin: 7pt 0; }
+  .steps > li::before { content: counter(step); position: absolute; left: 0; top: 0;
+    width: 18pt; height: 18pt; border-radius: 9pt; background: var(--accent); color: #fff;
+    font-size: 9.5pt; font-weight: 700; text-align: center; line-height: 18pt; }
+  .note, .warn, .rule-box { padding: 8pt 11pt; margin: 10pt 0; border-radius: 0 4px 4px 0;
+    background: var(--panel); page-break-inside: avoid; break-inside: avoid; font-size: 10.6pt; }
+  .note { border-left: 3pt solid #2f6f8f; }
+  .warn { border-left: 3pt solid var(--warn); }
+  .rule-box { border-left: 3pt solid var(--accent); }
+  .note b, .warn b, .rule-box b { display: inline; }
+  table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 10.2pt; page-break-inside: avoid; break-inside: avoid; }
+  th, td { text-align: left; vertical-align: top; padding: 5pt 7pt; border-bottom: 0.5pt solid var(--rule); }
+  th { font-size: 8.6pt; letter-spacing: 0.8pt; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1pt solid var(--ink-soft); }
+  .cover { height: 250mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover h1 { font-size: 46pt; }
+  .cover .sub { font-size: 14pt; color: var(--ink-soft); margin-top: 4pt; }
+  .cover .meta { margin-top: 26pt; font-size: 10pt; color: var(--ink-faint); line-height: 1.7; }
+  .toc { page-break-after: always; break-after: page; }
+  .toc ol { list-style: none; padding-left: 0; counter-reset: toc; }
+  .toc > ol > li { counter-increment: toc; padding: 4pt 0; border-bottom: 0.5pt solid var(--rule); font-size: 11pt; }
+  .toc > ol > li::before { content: counter(toc) ". "; color: var(--accent); font-weight: 700; }
+  .toc .sub { color: var(--ink-faint); font-size: 9.6pt; display: block; padding-left: 14pt; }
+  @page { size: A4; margin: 16mm 12mm 18mm; }
+  .backlink { margin: 0 0 18px; font-size: 14px; }
+  .backlink a { color: #888; text-decoration: none; }
+  @media print { .backlink { display: none; } }
+</style>
+</head>
+<body>
+<div class="book">
+
+<p class="backlink"><a href="{{basePath}}/">&larr; {{companyShort}}</a></p>
+<section class="cover">
+  <span class="chapter-num">Operator's manual · September 2026</span>
+  <h1>Show Sequencer</h1>
+  <p class="sub">Backing tracks, video, MIDI and lighting from one iPad, on one clock.</p>
+  <div class="meta">
+    Written against the app as installed, 25 September 2026.<br>
+    Examples use the band's own set: <i>Main Set</i>, <i>Rat Star</i>, <i>BA Baby</i> and
+    <i>The Middlenight Men Theme</i>.<br>
+    Every picture is taken by one script from a rig prepared by another, so the whole set can be
+    retaken after a redesign in a single run.
+  </div>
+</section>
+
+<section class="toc chapter">
+  <div class="chapter-head"><h2>Contents</h2></div>
+  <ol>
+    <li>Before the first gig<span class="sub">What the app is, the rules it keeps, and what you need to plug in</span></li>
+    <li>The rig<span class="sub">Three setups, cabling order, and what each piece does</span></li>
+    <li>Getting songs in<span class="sub">The import grid, the song editor, every control</span></li>
+    <li>Sets<span class="sub">Running orders, what happens between songs, backdrops</span></li>
+    <li>Routing and the mixer<span class="sub">Buses, outputs, levels, mute and solo</span></li>
+    <li>Tonight<span class="sub">The pre-show check: the set, the rig, and a line check per bus</span></li>
+    <li>Showtime<span class="sub">Every pane, every control, and how a show runs</span></li>
+    <li>Video<span class="sub">Attaching a screen, fades, screen latency and the Sync Check</span></li>
+    <li>The song alignment window<span class="sub">Lining a song's video and lighting up against its audio, with a preview, markers and an explicit Save</span></li>
+    <li>MIDI<span class="sub">Destinations, test notes, and starting another machine</span></li>
+    <li>Lighting<span class="sub">Capturing DMX, watching it, sending it out</span></li>
+    <li>Capturing DMX from the rig<span class="sub">The wired link, two invisible traps, and reading Test DMX Input before you commit to a take</span></li>
+    <li>The phone<span class="sub">Remote mode, the web remote, the password, and the mix from a pocket</span></li>
+    <li>Stands: charts and score parts<span class="sub">A read-only page for the band, what works today and what is not built yet</span></li>
+    <li>Networks<span class="sub">Wired and Wi-Fi, addresses, and keeping lights off the air</span></li>
+    <li>Backup and moving iPads<span class="sub">One file, what is in it, and restoring</span></li>
+    <li>Settings, area by area<span class="sub">Every setting, what it does, and what it would do to a running show</span></li>
+    <li>When something is wrong<span class="sub">Symptoms, causes, and the log to send</span></li>
+    <li>Appendices<span class="sub">What is on disk, developer switches, glossary</span></li>
+  </ol>
+</section>
+
+<section class="chapter" id="ch1">
+  <div class="chapter-head">
+    <span class="chapter-num">Chapter one</span>
+    <h2>Before the first gig</h2>
+  </div>
+  <p class="lede">Ten minutes of reading that will save an hour at a soundcheck.</p>
+
+  <h3>What this app is</h3>
+  <p>Show Sequencer plays a band's backing tracks and, at the same time, the things that must stay
+  with them: video on a screen behind you, MIDI to whatever else is on stage, and lighting. It runs
+  from an iPad at the kit, and it is built so that the person operating it is usually also playing.</p>
+
+  <h3>One clock</h3>
+  <p>Everything runs from the audio clock. Video, MIDI and lighting all read that clock; none of them
+  can push it. This is the single most important thing about the app, and it is why a set that drifts
+  on other rigs stays locked on this one. When you align a video or a lighting capture later in this
+  manual, you are moving that thing against the clock — never moving the clock.</p>
+
+  <div class="rule-box"><b>Nothing ever starts itself.</b> Not when you open a screen, not after a
+  crash, not after the app has been away in the background. A song starts when you press Play, when
+  the footswitch does, or when the set says the previous song runs into it. That is the whole list.</div>
+
+  <h3>Two modes, kept apart</h3>
+  <p><b>Build</b> is where you prepare: import songs, name tracks, set levels, build the running
+  order, set the rig up. It is four doors — Songs, Sets, Mixer and Settings — and each one carries a
+  line saying what is behind it, so how many songs are on the iPad or whether the rig wants a look
+  is readable without going in. <b>Showtime</b> is the performance screen: fixed layout, big targets, nothing
+  that rearranges itself. You reach Showtime through one door at the foot of the sidebar, and you
+  leave it through one control in its own top corner, with a confirmation, so it cannot happen by
+  accident.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/build-doors.jpg" loading="lazy" alt="The Build sidebar">
+    <figcaption><b>Four doors.</b> Songs, Sets, Mixer and Settings, each saying what is behind it
+    right now, with Tonight above them and the Showtime door pinned at the foot. It collapses to an
+    icon rail when you want the width.</figcaption>
+  </figure>
+
+  <h3>What you need</h3>
+  <table>
+    <tr><th>Piece</th><th>Why</th></tr>
+    <tr><td>iPad</td><td>The show runs here. Everything else is optional.</td></tr>
+    <tr><td>Audio interface</td><td>More than two outputs: separate click, backing, stems. Class-compliant USB.</td></tr>
+    <tr><td>Powered hub or dock</td><td>The iPad charges while the interface, MIDI and Ethernet stay connected.</td></tr>
+    <tr><td>Screen or projector</td><td>Optional. Attach it before the show, not during.</td></tr>
+    <tr><td>MIDI destination</td><td>Optional. An interface with DIN, or a network session for testing.</td></tr>
+    <tr><td>Network</td><td>Optional, and only for lighting and the phone remote. Wired beats Wi-Fi.</td></tr>
+    <tr><td>Footswitch</td><td>Optional. It presses Play, so your hands can stay on sticks.</td></tr>
+  </table>
+
+  <h3>The order things happen in</h3>
+  <ol class="steps">
+    <li>Plug the interface in and power it before launching the app, so the outputs are there to be found.</li>
+    <li>Attach the screen if you are using one, before the show rather than between songs.</li>
+    <li>Open the app. It prepares in the background; the Showtime door says READY when it is done.</li>
+    <li>Load the set you are playing. With no set loaded the show plays the library in name order.</li>
+    <li>Open <b>Tonight</b> and walk it. It checks the set, the rig and every bus, and says what will
+    bite before the doors open rather than after. Chapter two covers it.</li>
+    <li>Check the status lights on Showtime: audio, screen, MIDI, lights and DMX.</li>
+    <li>Play the first song from the Play bar or the footswitch.</li>
+  </ol>
+
+  <div class="note"><b>The five-second rule.</b> If the app is interrupted mid-show — a crash, a call,
+  a cable — it is built to be back at a usable READY state within five seconds of relaunching, with
+  the same set loaded and the same song armed. It will not start playing on its own when it gets
+  there. That is deliberate: you decide when the room hears something.</div>
+</section>
+
+<section class="chapter" id="ch2">
+  <div class="chapter-head"><span class="chapter-num">Chapter two</span><h2>The rig</h2></div>
+  <p class="lede">What to plug in, in what order, and why each piece is there.</p>
+
+  <h3>The smallest rig that works</h3>
+  <p>An iPad and a pair of headphones. Every song plays, video appears on the tablet itself, and
+  nothing else is needed. Useful for building a set on a train; not what you take to a gig.</p>
+
+  <h3>The band rig</h3>
+  <table>
+    <tr><th>Piece</th><th>What it does</th><th>Notes</th></tr>
+    <tr><td>USB audio interface</td><td>Separate outputs: click to in-ears, backing to front of house, stems where you want them</td><td>Class-compliant. Plug it in and power it before opening the app.</td></tr>
+    <tr><td>Powered USB-C hub</td><td>Keeps the interface, MIDI and a network adapter attached while the iPad charges</td><td>A show that runs flat is a show that stops.</td></tr>
+    <tr><td>Screen or projector</td><td>The song's own video, or the backdrop when it has none</td><td>Attach before the show. The app holds a surface ready so a song starts instantly.</td></tr>
+    <tr><td>MIDI out</td><td>Starts another machine, changes patches</td><td>DIN from the interface, or a network session over Wi-Fi.</td></tr>
+    <tr><td>Footswitch</td><td>Presses Play</td><td>So your hands can stay on sticks.</td></tr>
+  </table>
+
+  <h3>Adding lighting</h3>
+  <p>Lighting arrives over the network as Art-Net. Two directions matter, and they are separate
+  jobs: <b>capturing</b> a song's lighting from a rig that already exists, and <b>sending</b> a
+  captured song back out to a node. Chapter ten covers both.</p>
+
+  <div class="note"><b>Wired beats Wi-Fi for lighting.</b> An iPad's radio dozes between bursts, so
+  an Art-Net stream sent over Wi-Fi arrives in clumps and reads far below its real rate. A USB-C
+  Ethernet adapter at each end, or both ends on a switch, fixes it. Wi-Fi stays up alongside the
+  wire and keeps carrying MIDI and the phone remote.</div>
+
+  <h3>The order to plug things in</h3>
+  <ol class="steps">
+    <li>Interface, powered, into the hub. Then the hub into the iPad.</li>
+    <li>Screen. If it arrives late the app copes, but video readiness only settles once it is there.</li>
+    <li>MIDI, whether by DIN from the interface or by joining a network session on the Mac.</li>
+    <li>Network adapter, if you are running lights.</li>
+    <li>Open the app last. It reads what is attached as it prepares.</li>
+  </ol>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-network.jpg" loading="lazy" alt="The NETWORK card in Settings">
+    <figcaption><b>Settings → NETWORK.</b> Which link the iPad is actually on, and what each
+    network-using service is bound to. It never blocks READY — a show needs no network at all.</figcaption>
+  </figure>
+
+  <h3>Fixed addresses, once</h3>
+  <p>If you run a wire for lighting, give both ends a fixed address rather than letting them pick
+  their own: the lighting Mac's adapter <code>192.168.10.1</code>, the iPad <code>192.168.10.2</code>,
+  mask <code>255.255.255.0</code>, no router. Then nothing has to be re-pointed between gigs.</p>
+</section>
+
+<section class="chapter" id="ch3">
+  <div class="chapter-head"><span class="chapter-num">Chapter three</span><h2>Getting songs in</h2></div>
+  <p class="lede">A song is a folder of tracks, not a stereo file with things bolted on.</p>
+
+  <h3>What the app expects</h3>
+  <p>Up to sixteen audio tracks, optional MIDI, optional video, optional lighting. Every track gets
+  its own fader, its own output and its own name. A stereo file becomes two tracks, because two
+  sides were always two faders.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/songs-library.jpg" loading="lazy" alt="The Songs library">
+    <figcaption><b>Songs.</b> Everything on the iPad, with what each song carries and how much room
+    it takes. <b>Rescan</b> re-reads the folder — needed after copying files in with the Files app.
+    <b>Import Songs</b> opens the grid; <b>New Song</b> starts an empty one.</figcaption>
+  </figure>
+
+  <h3>Importing a folder of exports</h3>
+  <ol class="steps">
+    <li>Songs → <b>Import Songs</b>, and pick the folder your exports live in.</li>
+    <li>The grid opens: one row per song, one column per track position.</li>
+    <li>Name the tracks. Names travel with the track, so replacing a file later keeps the name.</li>
+    <li>Set each track's output. Click to one, backing to another, stems wherever you want them.</li>
+    <li>To move a track along its row, hold it until the fill sweeps across it (half a second), then
+    drag. A quick drag anywhere, on a track or not, scrolls the grid. Carry a track to the left or
+    right edge and the grid scrolls under it, faster the closer you go to the edge.</li>
+    <li>Save. Each row is written as it finishes, so a long import can be watched rather than waited on.
+    Once every song is saved the top-left button says <b>Done</b>; while songs are still waiting it
+    says <b>Cancel</b> and asks before forgetting them.</li>
+  </ol>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/import-grid.jpg" loading="lazy" alt="The import grid">
+    <figcaption><b>The import grid</b>, opened on two folders that are not yet in the library. Nothing
+    is written until you save.</figcaption>
+  </figure>
+
+  <div class="warn"><b>Sample rates must agree inside a song.</b> The first import sets the rate;
+  anything else is converted on the way in and said out loud, rather than discovered later as a song
+  that will not load.</div>
+
+  <p>There is a short, silent walkthrough on the import screen itself, showing the whole thing
+  happening: picking the folders, what the grid does with them, and pressing Save. It loops, and it
+  is there because the first import is the one moment where a picture beats a paragraph.</p>
+
+  <h3>The song editor</h3>
+  <p>Tap a song's slider icon in the library to open it. Each section is covered below.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/song-editor-top.jpg" loading="lazy" alt="The top of the song editor">
+    <figcaption><b>Name and audio.</b> Numbered names sort into show order, and renaming a song
+    renames it in every set it appears in. Each track row shows its file, its output and its level,
+    with Replace and Remove beside it.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/song-editor-video.jpg" loading="lazy" alt="The video row of the song editor">
+    <figcaption><b>Video.</b> A real frame from the song's own video and a scrub bar. Its timing
+    against the song is set in the alignment window (chapter nine), from the ALIGNMENT section
+    further down the editor.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/song-editor-dmx.jpg" loading="lazy" alt="The MIDI and DMX rows">
+    <figcaption><b>MIDI and DMX.</b> The MIDI file sent while this song plays, and the song's own
+    lighting - imported from a file, or captured live from the rig (chapter twelve).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/song-editor-metronome.jpg" loading="lazy" alt="The metronome card">
+    <figcaption><b>Metronome.</b> Off, the song's click track, a tempo you type, or the song's own
+    MIDI tempo map — offered only when that file actually carries one.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/song-editor-leadin.jpg" loading="lazy" alt="The lead-in card">
+    <figcaption><b>Lead-in.</b> Whether this song waits for its video to be ready, or starts on time
+    and clips the first frames. Per song, with the rig's own default behind it.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/library-grid-edit.jpg" loading="lazy" alt="The bulk edit grid">
+    <figcaption><b>Edit in Grid.</b> Songs already on the iPad reopened in the import grid's own
+    layout: one row per song, one column per track position, so a whole column can be renamed or
+    pointed at a bus in one go. Nothing lands until Save, and it says how many songs will
+    change.</figcaption>
+  </figure>
+
+  <h3>Charts and score parts</h3>
+  <p>Further down the editor, <b>CHART AND SCORES</b> holds the song's lyric-and-chord chart and any
+  PDF score parts, for band members' own phones and tablets. They never appear on Showtime.
+  Chapter thirteen covers them.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/song-editor-charts.jpg" loading="lazy" alt="The chart and scores section">
+    <figcaption><b>Chart and scores.</b> One chart of words and chords, and any number of PDF parts.
+    <b>Time the chart</b> plays the song once and you tap along; after that it scrolls itself, here
+    and on every stand.</figcaption>
+  </figure>
+
+  <h3>Folders</h3>
+  <p>The Songs screen groups into collapsible folders, and a heading is always drawn with its count.
+  <b>New folder</b> in the header makes one; a half-second hold on a heading renames or deletes it,
+  and deleting a folder never deletes a song — they become ungrouped. In Bulk Edit, <b>Move to
+  folder…</b> files a whole selection at once, and the sheet's first row makes a new folder and
+  files them into it in the same step.</p>
+  <p>None of this moves anything on disk. A song is still named by its own folder under Documents,
+  so sets, the running order and every command that names a song are untouched by filing one. A
+  folder is a way of looking at the library, not a place a song lives.</p>
+  <p>The set editor's song picker gets the same folders as a filter, so building a set from one
+  band's material does not mean scrolling past another's.</p>
+
+  <h3>Deleting a song</h3>
+  <p>Swipe a song's row to the left in the library and tap Delete. It always asks first: <b>Delete
+  this song?</b> Everything in its folder goes, and any set that names it shows it as missing.
+  <b>Keep it</b> backs out. Deleting is refused while the show plays.</p>
+
+  <h3>Press and hold a song for more</h3>
+  <p>Hold a song's row in the library for half a second and a menu opens beside it: <b>Edit this
+  song</b>, <b>Align to audio</b>, <b>Add to a set</b>, <b>Delete this song</b>. Everything in that menu is also reachable
+  the ordinary way - it is a shortcut, never the only route to anything. While you hold, the row
+  fills with colour so you can see the hold registering; let go early and the fill retreats rather
+  than opening anything. <b>Align to audio</b> opens the song's alignment window (chapter nine);
+  if the show is playing it asks to stop the show first.</p>
+  <p>An entry you cannot use right now sits in the menu dimmed, with the reason underneath, rather
+  than failing silently - <b>Delete this song</b>, for instance, while the show is playing. The same
+  gesture and the same rule - stated reasons, never a dead control - turns up again in the next two
+  chapters and in the mixer.</p>
+</section>
+
+<section class="chapter" id="ch4">
+  <div class="chapter-head"><span class="chapter-num">Chapter four</span><h2>Sets</h2></div>
+  <p class="lede">The running order, and what happens in the gaps.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/sets-manage.jpg" loading="lazy" alt="Manage Sets">
+    <figcaption><b>Manage Sets.</b> Create, load and delete. The loaded set is marked, and loading
+    one while a song plays asks first.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/set-editor.jpg" loading="lazy" alt="The set editor">
+    <figcaption><b>A set.</b> Four songs in order, each row carrying how the show gets into it, plus
+    the set's own backdrop and video-fade overrides on the right.</figcaption>
+  </figure>
+
+  <h3>What happens between songs</h3>
+  <p>This belongs to the set, not the song: the same recording waits for the singer in one set and
+  runs straight in on another.</p>
+  <table>
+    <tr><th>Choice</th><th>Meaning</th></tr>
+    <tr><td><b>Wait</b></td><td>The show stops at the end of the song and waits for you.</td></tr>
+    <tr><td><b>Run in</b></td><td>The next song follows immediately, with no gap.</td></tr>
+    <tr><td><b>Run in after</b></td><td>The next song follows after a gap you set, in half-seconds.</td></tr>
+  </table>
+
+  <p>Beside a gap's stepper sits a row of one-tap presets: <b>0.5 s</b>, <b>1 s</b>, <b>2 s</b>,
+  <b>4 s</b>, <b>6 s</b> and <b>10 s</b>. The one that matches the current gap is lit. Use the
+  stepper for anything in between.</p>
+
+  <p><b>One row</b> carries the song, how it starts and, for "run in after", the gap. The stepper
+  moves in half seconds and a row of presets — 0.5, 1, 2, 4, 6 and 10 seconds — puts each one a
+  single tap away. A song may appear twice, which is what an encore is.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/backdrops.jpg" loading="lazy" alt="Backdrops">
+    <figcaption><b>Backdrops.</b> What plays when a song has no video of its own — a still or a loop.
+    One is the rig's default; a set may name its own, which wins while it is loaded.</figcaption>
+  </figure>
+
+  <h3>Renaming and deleting a set</h3>
+  <p><b>Rename</b> sits in the set editor's header, and beside Edit and Load in Manage Sets' preview.
+  It refuses an empty name, a name another set already has, and any rename while the show plays,
+  and says which. Renaming the set that is loaded keeps it loaded.</p>
+  <p>Deleting a set, from its bin or its hold menu, always asks first: <b>Delete this set?</b> The
+  running order goes; the songs stay on the iPad. The same goes for a backdrop's bin on the
+  Backdrops screen.</p>
+
+  <h3>Press and hold, here too</h3>
+  <p>The same half-second hold from chapter three works on a song's row inside a running order - 
+  <b>Edit this song</b>, <b>Remove from this set</b> - and on a set's own row in Manage Sets - 
+  <b>Load</b> (or <b>Unload</b>), <b>Edit this set</b>, <b>Delete this set</b>. Nothing here is
+  offered that a visible control could not already do; the hold just shortcuts to it.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/set-preview.jpg" loading="lazy" alt="The set preview">
+    <figcaption><b>The preview</b> from Manage Sets: what the set holds, read-only, with EDIT and
+    LOAD. With no set loaded at all, the show plays the library in name order.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch5">
+  <div class="chapter-head"><span class="chapter-num">Chapter five</span><h2>Routing and the mixer</h2></div>
+  <p class="lede">Tracks belong to the song. Buses belong to the rig. Changing interface never means editing songs.</p>
+
+  <h3>The idea</h3>
+  <p>A track says which bus it feeds. A bus says which physical output it leaves by, and how loud.
+  Move the rig to another interface and you re-point the buses; every song is untouched.</p>
+
+  <div class="note"><b>An interface the iPad has met before gets its own routing back.</b> Plug in
+  an audio interface it remembers and every bus returns straight to the outputs you last gave it - 
+  no re-pointing at soundcheck. Plug in one it has never seen and it gets a sensible starting map
+  from the show's own defaults, with a note on Settings' THIS RIG card saying so, so there is
+  something to check rather than nothing to notice.</div>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/mixer-screen.jpg" loading="lazy" alt="The mixer">
+    <figcaption><b>The Mixer.</b> The armed song's tracks on the left, the rig's buses on the right,
+    with the song's name and a play button at the top. Reached from the sidebar, from the song
+    editor's Mixer button, or by tapping the song title on Showtime.</figcaption>
+  </figure>
+
+  <h3>Working the faders</h3>
+  <ul>
+    <li>Drag the cap. A tap elsewhere does nothing — a screen at the kit gets knocked.</li>
+    <li>Double-tap a cap to put it back to 0 dB.</li>
+    <li><b>M</b> and <b>S</b> are live only and never saved. Showtime shows "MUTE/SOLO ACTIVE · Clear"
+    whenever any are on, so none can be left up by accident.</li>
+    <li>The mixer has the same one-tap clear: <b>Clear mute and solo</b> appears in the column
+    header whenever any mute or solo is on, and clears every one of them, tracks and buses.</li>
+  </ul>
+
+  <div class="rule-box"><b>The mixer has a Save.</b> What you change here is a draft until you press
+  it, and Done asks if you have not. The one exception is the song playing right now: a fader moved
+  on it is heard at once and written to the song when the show stops, never during it.</div>
+
+  <p>A strip reads the same either side of the board: the dB readout at the top, the fader on its
+  printed scale with a meter beside it, then M and S, then the coloured name plate at the foot. A
+  track strip's plate carries a second line saying where that track goes; a bus strip's says which
+  output it leaves by. Bus levels belong to the rig, so they are the same in every song.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/mixer-sends.jpg" loading="lazy" alt="A track selected, with the inspector showing where it goes">
+    <figcaption>Selecting a strip opens the <b>inspector</b> beside the board on a wide enough
+    screen, and as a sheet otherwise: the name, the level to the decibel, and every bus it feeds
+    with its own trim.</figcaption>
+  </figure>
+
+  <h3>Naming and routing</h3>
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/mixer-rename-track.jpg" loading="lazy" alt="Renaming a track">
+    <figcaption>Tap a <b>track's</b> name plate to rename it. Saving is refused while the show plays,
+    and it says so rather than failing quietly.</figcaption>
+  </figure>
+
+  <p>Tap a <b>bus's</b> name plate to rename it or send it somewhere else. The outputs it offers
+  are the ones the connected interface can actually honour, so the label and the speaker can never
+  disagree: on a box with a routing matrix that is every output it has, and on a plain two-output
+  interface it is left, right or both, because that is all a bus can be given there. The targets
+  are large, because this gets used at a soundcheck with a torch in your teeth.</p>
+
+  <p>Hold either name plate instead of tapping it, and a menu opens with a few more shortcuts: the
+  same rename (or rename-and-reroute for a bus), plus <b>Reset to 0 dB</b>, <b>Mute</b> and
+  <b>Solo</b> - the same half-second hold as chapter three's library rows, refusing whatever the show
+  would refuse at the time, with the reason stated rather than a dead row.</p>
+
+  <p><b>Add bus</b> declares another. A new bus has no output until you choose one, so it can never
+  appear in the wrong speakers. Removing one is refused while a track still feeds it.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/mixer-routing.jpg" loading="lazy" alt="The routing view">
+    <figcaption><b>Routing</b> shows every track against every bus at once — the fastest way to see
+    that a click is going where you think it is, across a whole song.</figcaption>
+  </figure>
+
+  <h3>Feeding more than one bus</h3>
+  <p>A track's strip carries a second line under its name: where it goes. Tap it to open the sends
+  sheet - every bus the rig has, a mark against each one this track already feeds, and PRIMARY
+  beside its main destination. Tap another bus to add it as a send, up to about four destinations in
+  total; tap a send off to remove it, down to the one it cannot lose. Each send past the primary
+  carries its own trim slider underneath.</p>
+  <p>Adding or removing a send is refused while this song is playing, the same rule as adding or
+  removing a bus. Trimming a send's level is not refused - it moves at once, like any other
+  fader.</p>
+</section>
+
+<section class="chapter" id="ch6">
+  <div class="chapter-head"><span class="chapter-num">Chapter six</span><h2>Tonight</h2></div>
+  <p class="lede">The check that runs before the doors open, so the surprises happen while there is
+  still time to do something about them.</p>
+
+  <p>Tonight sits above the four doors, at the top of the sidebar, and it is first for a reason: it
+  is the one screen that looks at the whole rig at once and tells you what is wrong in plain words.
+  The Showtime door offers it once per session when something is red, and never gets in the way a
+  second time.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/tonight.jpg" loading="lazy" alt="The Tonight screen">
+    <figcaption><b>Three columns.</b> The set and whether every song has what it needs, the rig
+    itself, and a line check that walks the buses one at a time.</figcaption>
+  </figure>
+
+  <h3>The set</h3>
+  <p>One row per song in the running order, saying what it carries and what it is missing. A song
+  the set names that is not on this iPad is named here rather than discovered at the gap before it.
+  Under a song's title it also says, without grading it, when that song sends a track somewhere this
+  rig has no bus for — the track plays, through the front-of-house bus, and chapter five's mixer is
+  where you would change it.</p>
+
+  <h3>The rig</h3>
+  <p>Interface, screen, MIDI, lights, network, free space, battery. Each line is graded: green is
+  fine, amber is worth a look, red is something to fix. A line you can act on carries the way to
+  fix it, and tapping it takes you to the setting rather than making you find it.</p>
+
+  <div class="note"><b>Amber is not a fault.</b> Off on purpose is neither working nor wrong — video
+  output turned off on a rig with no screen is an ordinary evening, not a warning. A rig where
+  everything is fine shows no amber anywhere, which is what makes amber worth reading.</div>
+
+  <h3>The line check</h3>
+  <p>A row per bus. Ping plays a tone down that bus alone for a couple of seconds; tap <b>Heard
+  it</b> and it moves to the next. It is the fastest honest way to find out which speaker is which,
+  and it is the only part of Tonight that makes a noise. It stops on its own if the show starts.</p>
+  <p>A MIDI row after the buses sends the same test note Settings does. It is graded manually and
+  never blocks anything, because a MIDI destination that is not answering is a normal state for a
+  rig that does not use one.</p>
+
+  <h3>Going on anyway</h3>
+  <p>Nothing here stops you. <b>Go on with problems?</b> asks once and lists what is still red, and
+  then takes you to Showtime. The check is advice from something that can see the whole rig at once,
+  not a gate.</p>
+
+  <p>Under the Tonight row in the sidebar is when it was last looked at — "Checked 18 minutes ago",
+  or, past six hours, a reminder that it no longer counts for tonight. Opening it by hand is free and
+  changes nothing; loading a set or relaunching the app arms the door's one offer again.</p>
+</section>
+
+<section class="chapter" id="ch7">
+  <div class="chapter-head"><span class="chapter-num">Chapter seven</span><h2>Showtime</h2></div>
+  <p class="lede">One screen, fixed. Everything here is meant to be read at arm's length, mid-song.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/showtime-ready.jpg" loading="lazy" alt="Showtime, armed and stopped">
+    <figcaption><b>Armed and waiting.</b> Song two of four, stopped at the start, the waveform ready,
+    the setlist beside it and the Play bar across the foot.</figcaption>
+  </figure>
+
+  <h3>The status bar</h3>
+  <p>Left to right along the top: the loaded set, the time, any warning in plain words, then a dot
+  each for audio, the screen, MIDI, lights and DMX, and finally Settings, Debug and the way out. A
+  dot is green when the thing it names is working, amber when it wants a look, and unlit when there
+  is nothing to say — a rig with no screen is a valid rig, so colour on this bar always means
+  do something.</p>
+  <table>
+    <tr><th>Light</th><th>Green means</th></tr>
+    <tr><td>AUDIO</td><td>The engine is running and the outputs are there.</td></tr>
+    <tr><td>DISPLAY</td><td>A screen is attached and video will be presented.</td></tr>
+    <tr><td>MIDI</td><td>A destination is open.</td></tr>
+    <tr><td>DMX</td><td>This show carries lighting. Grey means this song has none; it pulses while lighting is changing.</td></tr>
+  </table>
+
+  <h3>The now-playing card</h3>
+  <p>Status, the song, the timers, and underneath the title what comes next and how it starts.
+  Tapping the title opens that song's mixer; holding it opens a menu with the song editor, the
+  alignment window and the chart.</p>
+
+  <h3>The setlist</h3>
+  <p>Each song is its own row with its own edge, so what you can press is obvious in the dark. Tap
+  one to <b>cue</b> it — never to start it. READY marks what Play will start; AUTO marks a song the
+  set runs into. The list scrolls itself as the show moves on, and stops fighting you if you have
+  scrolled it by hand.</p>
+
+  <h3>Cueing, and playing now</h3>
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/showtime-cued.jpg" loading="lazy" alt="Showtime with a song cued">
+    <figcaption>With something cued, the Play bar narrows and <b>PLAY NOW</b> slides in beside it.
+    That button stops what is playing and starts the cued song at once.</figcaption>
+  </figure>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/showtime-confirm-playnow.jpg" loading="lazy" alt="Play now confirmation">
+    <figcaption>With <i>Confirm before Play now</i> on in Settings, it asks first. Off, it goes
+    immediately.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/showtime-playing.jpg" loading="lazy" alt="Showtime playing">
+    <figcaption><b>Playing.</b> Timers running, the playhead crossing the waveform, the video pane
+    showing what the audience sees, bus meters moving.</figcaption>
+  </figure>
+
+  <p>Hold the video pane for half a second, when the armed song has video or DMX, and Showtime opens
+  that song's alignment window (chapter nine), with its locator where the show is standing. If the
+  show is playing it asks first: <b>Stop the show and align this song?</b> There are only two
+  answers, Cancel and <b>Stop and align</b>. There is no "keep playing" choice here, because the
+  window plays the song itself and can never run at the same time as the show.</p>
+
+  <h3>The curfew</h3>
+  <p>The banner shows the curfew, how long until it, what the rest of the set still needs, and your
+  slack — the number that says a song is about to be cut <i>before</i> it is cut.</p>
+  <p><b>Tap the banner to change it.</b> A venue that moves the curfew mid-show does not require
+  leaving Showtime: the banner opens a time wheel with Cancel and Save, and Save recalculates
+  everything without touching playback.</p>
+
+  <h3>Leaving</h3>
+  <p>Leaving Showtime no longer has to stop the show. <b>Exit Showtime</b>, in the status bar's top
+  corner, always asks first and offers three ways forward:</p>
+  <table>
+    <tr><th>Choice</th><th>What it does</th></tr>
+    <tr><td><b>Cancel</b></td><td>Stays on Showtime. Nothing changes.</td></tr>
+    <tr><td><b>Leave, keep playing</b> (green)</td><td>Drops back to Build mode with the show still
+    running. The transport carries on under the Play bar at the foot of the sidebar.</td></tr>
+    <tr><td><b>Stop and exit</b> (red)</td><td>Stops the show first, then leaves.</td></tr>
+  </table>
+  <p>The two active choices deliberately lead with different words - "Leave" against "Stop" - rather
+  than sharing one, so which choice keeps the music going reads from the word alone, at a glance, in
+  the dark.</p>
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/showtime-confirm-exit.jpg" loading="lazy" alt="Exit confirmation">
+    <figcaption>Exit asks before doing anything, never after.</figcaption>
+  </figure>
+
+  <h3>Solo Showtime</h3>
+  <p>A second Showtime, for one performer on one iPad rather than a band with a drummer operating.
+  Switch to it in Settings → Showtime screen; the door opens whichever you chose.</p>
+  <p>It is chart-led: the song's words and chords fill the screen, scrolling themselves if the chart
+  has been timed, with the current line held a third of the way down. Underneath are the next song
+  and the transport, and that is the whole screen — no faders, no video pane, no waveform, no
+  Settings and no Debug. A drawer over the chart holds the running order; tapping a song cues it and
+  never plays it, exactly as the band screen's setlist does.</p>
+  <p>It is the one screen built with pedals in mind first, since a solo performer's hands are on an
+  instrument: the same pedal keys work here as everywhere, and the Play bar is sized to be found
+  with a foot rather than a glance.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/solo-showtime.jpg" loading="lazy" alt="Solo Showtime">
+    <figcaption><b>Solo Showtime.</b> The chart fills the screen, the next song and the transport sit
+    under it, and there is nothing else to press. The words here are placeholder, not the
+    song's.</figcaption>
+  </figure>
+
+  <h3>The Debug button's hold</h3>
+  <p>Debug, beside Exit Showtime, opens on a two-second hold when no passphrase is set - a stray tap
+  does nothing, and the button fills with colour as you hold so you can see it building rather than
+  wondering whether you pressed it right; let go early and the fill retreats instead of opening
+  anything. Set a passphrase (chapter seventeen's TROUBLESHOOTING card) and a plain tap opens a
+  password prompt instead.</p>
+
+  <h3>The buses pane</h3>
+  <p>The rig's outputs with live meters, M and S, each strip carrying its name in colour at the top
+  so what you are holding reads from across a stage. Whole strips only — it scrolls rather than
+  resting on half a fader. Tapping the BUSES label at its foot opens the same strips large, over
+  the rest of the screen; it never touches the transport.</p>
+</section>
+
+<section class="chapter" id="ch8">
+  <div class="chapter-head"><span class="chapter-num">Chapter eight</span><h2>Video</h2></div>
+  <p class="lede">On the same clock as the audio, with the screen's own delay accounted for.</p>
+
+  <h3>Getting a picture</h3>
+  <ol class="steps">
+    <li>Attach the screen before the show. The app keeps a surface open so a song starts instantly.</li>
+    <li>Check DISPLAY is green on Showtime. Amber says no screen is attached, or video output is off in Settings.</li>
+    <li>A song with no video of its own shows the <b>backdrop</b> — a still or a loop, set for the rig and optionally per set.</li>
+  </ol>
+
+  <h3>Fades</h3>
+  <p>Set the rig's own fade in Settings, override it per set, and override that per song — separately
+  for the way a song's video arrives and the way it leaves. A song with no video reveals the backdrop
+  rather than dipping through black.</p>
+
+  <h3>Two different delays</h3>
+  <p>There are two numbers that decide when a picture appears, and they fix two different
+  problems. It is worth getting straight which is which.</p>
+  <table>
+    <tr><th>Number</th><th>What it fixes</th><th>Where it lives</th></tr>
+    <tr><td><b>Screen latency</b></td><td>The screen, projector and cable are slow. Every song's
+    picture arrives late by the same amount.</td><td>Settings, SCREEN LATENCY. One number for the
+    whole rig.</td></tr>
+    <tr><td><b>A song's own video shift</b></td><td>This one video file was cut or exported a little
+    early or late against its audio. Only this song is out.</td><td>That song's alignment window
+    (chapter nine). Saved with the song.</td></tr>
+  </table>
+  <p>The two add together. Get the screen latency right first, on the real screen, with the Sync
+  Check. Only then shift a song that still looks wrong. If every song looks late by the same
+  amount, the fix is screen latency, not every song.</p>
+
+  <h3>Screen latency and the Sync Check</h3>
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/settings-video.jpg" loading="lazy" alt="The SCREEN LATENCY card">
+    <figcaption><b>Settings, SCREEN LATENCY.</b> The latency, its size in frames, what it means, and
+    the -10 ms / Zero / +10 ms steps. The Sync Check button sits below, out of this picture. This
+    card replaces the old GLOBAL VIDEO OFFSET card and its Align to Video button.</figcaption>
+  </figure>
+  <p>The card shows the latency in milliseconds, with its size in frames once a song with video has
+  been armed. <b>-10 ms</b>, <b>Zero</b> and <b>+10 ms</b> change it. A bigger number drives the
+  video further ahead of the audio, for a slower screen.</p>
+  <ol class="steps">
+    <li>Stop the show. The Sync Check is refused while anything plays.</li>
+    <li>Tap <b>Play Sync Check</b>. It plays a flash and a click together through the real outputs
+    and on the real screen, outside the running order.</li>
+    <li>Watch the audience's screen, not the iPad, and step the latency until each flash and click
+    land together.</li>
+    <li>Tap <b>Stop Sync Check</b>. The new latency is saved then, and the song that was armed comes
+    back where it was. It does not start playing.</li>
+  </ol>
+  <div class="note"><b>The Sync Check needs its song.</b> It plays the calibration song
+  <code>99 - Sync Check</code> from the library. Without it the button is greyed out and says so.
+  With no external screen attached the card warns you, because the number is for the screen the
+  audience sees.</div>
+  <p>When the armed song carries its own video shift, the card mentions it in one line, and says it
+  is changed in that song's alignment window, not here.</p>
+</section>
+
+<section class="chapter" id="ch9">
+  <div class="chapter-head"><span class="chapter-num">Chapter nine</span><h2>The song alignment window</h2></div>
+  <p class="lede">One window per song. The audio stays still. You slide the video and the lighting
+  until they sit right against it.</p>
+
+  <h3>What it is for</h3>
+  <p>A song's video or lighting sometimes arrives slightly early or late against its audio: a video
+  exported with a few frames of black at the top, or lighting that came from another machine. The
+  alignment window is where you fix that, once, for that song. The fix is saved in the song and used
+  at every show. A capture made on this iPad with <b>Capture DMX</b> needs no alignment, because the
+  iPad that started the song also heard the lights.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/alignment-window.jpg" loading="lazy" alt="The song alignment window">
+    <figcaption><b>The alignment window</b>, Video lane selected. Top bar: Undo,
+    Redo, Discard, Save, Close. Left: the preview and its transport. Right: the selected lane's
+    shift and nudges. Below: the zoom bar and the lanes - Audio fixed, Video and DMX as clips, MIDI
+    hatched out. A target ("Downbeat") and a marker ("Lips") meet, so both show a tick.</figcaption>
+  </figure>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/alignment-window.jpg" loading="lazy" alt="The ALIGNMENT section of the song editor">
+    <figcaption><b>The song editor's ALIGNMENT section.</b> One button for the whole song. When it
+    cannot open, the line underneath turns amber and says why.</figcaption>
+  </figure>
+
+  <h3>Getting in</h3>
+  <table>
+    <tr><th>From</th><th>How</th></tr>
+    <tr><td>The song editor</td><td>The <b>ALIGNMENT</b> section, <b>Align to Audio</b>. Shown when
+    the song has video or DMX.</td></tr>
+    <tr><td>The Songs library</td><td>Hold the song's row, then <b>Align to audio</b>.</td></tr>
+    <tr><td>Showtime</td><td>Hold the video pane for half a second. The locator starts where the show
+    is standing.</td></tr>
+    <tr><td>The Universe Matrix</td><td>Its <b>Align to Audio</b> button. The window opens on the DMX
+    lane.</td></tr>
+  </table>
+  <p>It opens on the Video lane if the song has video, otherwise on DMX. The song editor's button is
+  refused, with the reason underneath, for a song that has not been saved yet, for a song whose files
+  have changed since it was saved, and while the app is still preparing.</p>
+
+  <div class="rule-box"><b>The window and the show never play at the same time.</b> The window plays
+  the song itself. Open it while the show is playing and it asks first: <b>Stop the show and align
+  this song?</b> The show stops where it is, then the window opens. If the show is started some
+  other way while the window is open (from a phone remote, say), the window's preview stops at
+  once, your edits are kept, and Save waits until the show stops.</div>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/showtime-confirm-align.jpg" loading="lazy" alt="Stop the show and align this song?">
+    <figcaption>From Showtime: two choices only. There is no "keep playing" here.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/alignment-dmx-lane.jpg" loading="lazy" alt="The alignment window on the DMX lane">
+    <figcaption><b>The DMX lane selected.</b> The clip shows how much the lighting is moving rather
+    than what colour it is, which is what you line up against a song. <b>Suggest</b> offers an offset
+    from the big jumps in it; the audio lane never moves, because it is the clock.</figcaption>
+  </figure>
+
+  <h3>The lanes</h3>
+  <table>
+    <tr><th>Lane</th><th>What it shows</th><th>Can it move?</th></tr>
+    <tr><td><b>Audio</b></td><td>The song's waveform</td><td>Never. It is the clock everything else
+    lines up against.</td></tr>
+    <tr><td><b>Video</b></td><td>A strip of the video's own frames</td><td>Yes. Drag it.</td></tr>
+    <tr><td><b>DMX</b></td><td>How busy the lighting is, moment to moment</td><td>Yes. Drag it.</td></tr>
+    <tr><td><b>MIDI</b></td><td>Hatched out and marked as the next step</td><td>Not yet. It needs a
+    per-song MIDI offset first.</td></tr>
+  </table>
+  <p>Drag a clip right and it plays later; drag it left and it plays earlier. The selected lane's
+  panel (beside the preview, or on a narrow screen a sheet opened from the lane's name) shows its
+  shift in milliseconds and, for video, in frames. It says it plainly - "Picture shifted 40 ms
+  later (1.0 frames at 25 fps)", or "plays unshifted" at zero. It never claims the picture is in
+  time just because of the number.</p>
+
+  <h3>What your fingers do</h3>
+  <table>
+    <tr><th>Gesture</th><th>What it does</th></tr>
+    <tr><td>Drag a clip</td><td>Shifts that lane against the audio. There is no snapping.</td></tr>
+    <tr><td>Drag the red handle, or tap the ruler</td><td>Moves the locator, the line that says where
+    you are in the song.</td></tr>
+    <tr><td>Drag empty space</td><td>Scrolls the timeline. Nothing is edited.</td></tr>
+    <tr><td>Pinch</td><td>Zooms. The grid gets finer as you go in: bars, beats, then halves down to
+    sixteenths, then single video frames or milliseconds.</td></tr>
+    <tr><td>Double-tap a lane</td><td>Drops a marker there (a target, on the audio lane).</td></tr>
+  </table>
+  <p>The zoom bar above the lanes has <b>-</b>, a slider, <b>+</b>, <b>Whole song</b>, and a readout
+  of the finest grid line on show. A strip beside it says in plain words what your finger is doing
+  right now.</p>
+
+  <h3>Nudging</h3>
+  <p>For exact steps, the lane's panel has <b>-1 fr</b>, <b>-10 ms</b>, <b>+10 ms</b> and
+  <b>+1 fr</b> (one frame at the video's own rate; <b>1 ms</b> steps instead when there is no
+  video), and <b>Reset to 0</b>. The DMX lane also has <b>Suggest</b>: it looks for the lighting's
+  sharp hits against the song's beat and proposes a shift, with how sure it is. If there is not
+  enough to go on it says so and changes nothing. A suggestion is one undoable step, like any
+  other edit.</p>
+  <p>Video has no Suggest, on purpose. A music-video edit rarely cuts on the beat, so a beat matcher
+  would confidently line up the wrong thing. Video is lined up by hand, by watching the singer's
+  mouth against the vocal.</p>
+  <p>Instead, the Video lane shows <b>Lip sync to vocal track</b>, tagged <b>Soon</b>. It is a
+  placeholder. Tap it and it explains what it will do one day - find the singer's mouth in the
+  picture, line it up against the song's own vocal track and suggest a shift for you to check - and
+  changes nothing at all.</p>
+
+  <h3>Markers</h3>
+  <p>Markers are there to help your eyes, nothing else. Drop a <b>target</b> on the audio at a clear
+  moment - a word, a hit - and a <b>marker</b> on the video or lighting at the matching moment, then
+  drag the clip until they meet. When a marker sits on a target, both are drawn in green with a tick
+  and the word "Aligned".</p>
+  <div class="rule-box"><b>Markers never move anything.</b> They are never used in any calculation.
+  The window does not snap to them, and Suggest does not look at them. Only your drag or your nudge
+  changes a shift.</div>
+  <p>The MARKERS list shows every marker with its time. Tap a name to rename it; tap the cross to
+  remove it. <b>Marker at locator</b> and <b>Target on audio</b> drop one where the locator is.
+  Markers are saved with the song. If a video or lighting file is later replaced, its old markers
+  are dropped, and the window says how many.</p>
+
+  <h3>The preview</h3>
+  <p>The preview plays the song itself - its audio through your outputs, at the song's own levels,
+  and its picture in the window, with your unsaved shift already applied. The projector is left
+  alone, and no lighting or MIDI is sent.</p>
+  <table>
+    <tr><th>Control</th><th>What it does</th></tr>
+    <tr><td>Back to start</td><td>Puts the locator at the top of the song.</td></tr>
+    <tr><td>Frame back / forward</td><td>One video frame (40 ms with no video). The arrow keys do the
+    same on a keyboard.</td></tr>
+    <tr><td>Play (green) / Pause (red)</td><td>Runs the preview from the locator. Space does the same.</td></tr>
+    <tr><td>Beat lamp</td><td>Flashes on each beat in the corner of the picture.</td></tr>
+    <tr><td>Follow locator</td><td>Keeps the timeline scrolled to the locator while it plays.</td></tr>
+  </table>
+  <p>The corner readout says SHIFTED, UNSHIFTED or LINED UP (the last only when a marker actually
+  sits on a target). If the audio output changes while the preview plays, it stops; press Play to
+  carry on.</p>
+
+  <h3>Undo, Save, Discard</h3>
+  <p>Every finished drag, nudge, reset, suggestion or marker change is one step. <b>Undo</b> and
+  <b>Redo</b> sit in the top bar, greyed out when there is nothing to undo or redo (Command-Z and
+  Shift-Command-Z on a keyboard).</p>
+  <div class="rule-box"><b>Nothing is kept until you tap Save.</b> Save writes the song's video
+  shift, DMX shift and markers in one go, and the next show uses them. <b>Discard</b> throws every
+  change away. Closing with anything unsaved asks <b>Discard changes?</b>, says what each lane goes
+  back to, and offers <b>Keep editing</b>. A swipe cannot close the window past that question.</div>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/alignment-discard.jpg" loading="lazy" alt="Discard changes?">
+    <figcaption><b>Discard changes?</b> It names what each lane goes back to before anything is
+    thrown away.</figcaption>
+  </figure>
+  <p>Save is greyed out while the show is playing, and when there is nothing new to save. Save from
+  a window opened in the song editor and the editor picks up the same values, so its own Save or
+  Cancel neither overwrites nor undoes them.</p>
+  <div class="note"><b>Lighting from elsewhere gets a head start.</b> For a DMX file with no shift
+  of its own that did not come from this iPad's capture, the window starts from this rig's last
+  measured lighting delay, as a first undoable step, and says so. Nothing is kept unless you
+  save.</div>
+</section>
+
+<section class="chapter" id="ch10">
+  <div class="chapter-head"><span class="chapter-num">Chapter ten</span><h2>MIDI</h2></div>
+  <p class="lede">What starts the other machine, and how to prove it before the first song does.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-midi.jpg" loading="lazy" alt="MIDI destination card">
+    <figcaption><b>Settings → MIDI DESTINATION.</b> Choose where MIDI goes, fire a test note, and see
+    whether anything is actually listening.</figcaption>
+  </figure>
+
+  <h3>Two ways out</h3>
+  <ul>
+    <li><b>DIN from the interface.</b> The choice for a show: no network, no jitter.</li>
+    <li><b>A network session over Wi-Fi.</b> Useful when the iPad's port is taken by something else —
+    an Ethernet adapter, for instance.</li>
+  </ul>
+
+  <h3>Joining a network session</h3>
+  <ol class="steps">
+    <li>On the Mac: <b>Audio MIDI Setup</b> → Window → <b>Show MIDI Studio</b> → double-click <b>Network</b>.</li>
+    <li>Under <b>My Sessions</b>, add a session and tick it to enable.</li>
+    <li>In <b>Directory</b>, select the iPad and click <b>Connect</b>. It moves up into Participants.</li>
+    <li>Set <b>Live routings</b> to that session.</li>
+    <li>In your DAW, enable Track and Remote for that input.</li>
+    <li>On the iPad, choose that session as the destination and press <b>Test</b>.</li>
+  </ol>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-midi-open.jpg" loading="lazy" alt="Choosing a MIDI destination">
+    <figcaption><b>Choosing a destination.</b> It says whether it can actually reach what is named,
+    not only which name is selected — a session that has gone away looks identical otherwise.</figcaption>
+  </figure>
+
+  <div class="note"><b>The cable is the simple way.</b> Your interface's own MIDI out needs no
+  pairing, no session and no Wi-Fi. Wireless is the fallback for when that port is spoken for, and
+  Settings → MIDI carries a short walkthrough of the pairing — which happens entirely on the Mac, in
+  Audio MIDI Setup, and is the part that reliably catches people out the first time.</div>
+
+  <div class="note"><b>What a song sends.</b> Whatever its own MIDI file contains, in time with the
+  song, from the same clock. Typically a note at the very first tick — the one that starts the other
+  machine — and program changes through the song. If one song starts your DAW and another does not,
+  compare the note each sends; they are rarely the same.</div>
+</section>
+
+<section class="chapter" id="ch11">
+  <div class="chapter-head"><span class="chapter-num">Chapter eleven</span><h2>Lighting</h2></div>
+  <p class="lede">DMX means anything on that wire — lamps, hazers, motors. The app records it, plays it back on the show's own clock, and sends it out.</p>
+
+  <div class="note"><b>There is a walkthrough for the network part.</b> Settings → Lighting carries a
+  short silent video covering both shapes a rig takes — everything through a travel router, or one
+  cable from the iPad straight to the node — and what "on the same network" actually means. It is
+  there because this is the step people expect to be hard, and it is one rule rather than a
+  subject.</div>
+
+  <h3>Three jobs, kept apart</h3>
+  <table>
+    <tr><th>Job</th><th>Where</th></tr>
+    <tr><td><b>Capture</b> a song's lighting from the rig you already have</td><td>Song editor → DMX → Capture DMX</td></tr>
+    <tr><td><b>Align</b> it against the song, if it came from somewhere else</td><td>The song's alignment window: Align to Audio, from the song editor's ALIGNMENT section or the Universe panel</td></tr>
+    <tr><td><b>Send</b> it out to a node during a show</td><td>Settings → DMX OUTPUT</td></tr>
+  </table>
+
+  <h3>Before you capture</h3>
+  <ol class="steps">
+    <li>Get the iPad and the lighting machine onto the same network — a wire if you can, Wi-Fi if you must.</li>
+    <li>Point the lighting software at the iPad. Sending to its own machine (127.0.0.1) reaches nothing.</li>
+    <li>Open <b>Test DMX Input</b> from the song's DMX row. It lists every address the iPad has, and says what is arriving.</li>
+  </ol>
+
+  <p>Chapter eleven walks the wired setup and <b>Test DMX Input</b>'s own log in full, plus the two faults
+  that look exactly like a broken network and are not.</p>
+
+  <div class="warn"><b>If nothing arrives</b>, in order of likelihood: the lighting software is sending
+  to loopback or to a network the iPad is not on; iOS has not been given Local Network permission for
+  the app; the iPad is on a different Wi-Fi band; a VPN on the sending machine is swallowing local
+  traffic.</div>
+
+  <h3>Capturing</h3>
+  <ol class="steps">
+    <li>Stop the show. Capture is refused while anything plays, while the app is still preparing, and with no network.</li>
+    <li>Song editor → <b>DMX</b> → <b>Capture DMX</b>.</li>
+    <li>It arms and plays that song; your MIDI starts the rig exactly as it does in a show.</li>
+    <li>Watch the log and the small universe beside it. Channels light as they arrive.</li>
+    <li>Stop when you have what you need, or let the song finish.</li>
+    <li>Read the summary, use <b>Sanity Check</b> to see the activity under the waveform, then <b>Save</b> or <b>Discard</b>.</li>
+  </ol>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/dmx-capture-summary.jpg" loading="lazy" alt="Capture summary">
+    <figcaption><b>The summary.</b> Captured length against the song's length, universes, channels,
+    how long the rig took to answer, and a warning if it came over Wi-Fi. Nothing is written until
+    you choose.</figcaption>
+  </figure>
+
+  <div class="rule-box"><b>A capture needs no alignment.</b> The same device started the song and
+  heard the answer, so the timing is known rather than guessed. Only lighting that arrived some other
+  way needs the alignment window.</div>
+
+  <h3>Watching it</h3>
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/showtime-universe-matrix.jpg" loading="lazy" alt="The universe matrix">
+    <figcaption><b>The Universe Matrix</b>, opened from Showtime's DMX light: 512 cells, brightness
+    by value, tap a cell to read its channel and value.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/dmx-faders.jpg" loading="lazy" alt="The fader view">
+    <figcaption><b>The same moment as faders</b> — one per channel the song actually uses, labelled
+    and moving live. The switch at the top remembers which you prefer.</figcaption>
+  </figure>
+
+  <h3>Aligning lighting that came from elsewhere</h3>
+  <p>Lighting imported from a file rather than captured here may sit a little early or late. Open
+  the song's alignment window (chapter nine) - from <b>Align to Audio</b> in the song editor's
+  ALIGNMENT section, or from the Universe panel - and work on the DMX lane: drag it, nudge it, or
+  try <b>Suggest</b>. Drag right to make the lighting later. Nothing reaches the song until you tap
+  <b>Save</b>.</p>
+  <p>The old lighting-only alignment view, and the live nudging of the lights from Showtime while a
+  song played, are gone. A lighting shift is now changed only with the show stopped, in the window,
+  and takes effect as soon as it is saved.</p>
+
+  <h3>Sending it out</h3>
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-lighting.jpg" loading="lazy" alt="DMX output card">
+    <figcaption><b>Settings → DMX OUTPUT.</b> On or off, the node's address and port, the send rate,
+    a latency offset, and which link it may use.</figcaption>
+  </figure>
+  <ul>
+    <li>The last look is held when you stop, at the end of a song and between songs.</li>
+    <li>Nothing is sent at all until the first Play after launch. Set the node to hold on signal loss
+    and a crash leaves the stage lit rather than dark.</li>
+    <li>Before buying a node, prove the output against a Mac running the recorder in listen mode. The
+    rig notes give the exact steps.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="ch12">
+  <div class="chapter-head"><span class="chapter-num">Chapter twelve</span><h2>Capturing DMX from the rig</h2></div>
+  <p class="lede">The wired link that makes a capture reliable, and the two faults that look exactly
+  like a broken network and are not.</p>
+
+  <h3>What Capture DMX actually does</h3>
+  <p>It plays the song on the iPad. The song's own MIDI triggers your lighting software, exactly as
+  it will on the night, and the iPad records the Art-Net the rig sends back — aligned to the song's
+  own clock as it arrives, because the same device that started the song also heard the answer. The
+  result is saved as <code>song-lighting.dmx</code> in the song's own folder.</p>
+
+  <h3>Wiring the two machines together</h3>
+  <ol class="steps">
+    <li>A USB-C Ethernet adapter on the lighting Mac, and one on the iPad. One cable straight between them.</li>
+    <li>Give both ends a fixed address rather than letting them negotiate one, so nothing needs
+    re-pointing next time.</li>
+    <li>From the Mac, <code>ping</code> the iPad's address. A live wired link answers every time, at
+    around a millisecond.</li>
+  </ol>
+
+  <table>
+    <tr><th>End</th><th>Address</th><th>Subnet mask</th><th>Router</th></tr>
+    <tr><td>Lighting Mac's adapter</td><td><code>192.168.10.1</code></td><td><code>255.255.255.0</code></td><td>leave empty</td></tr>
+    <tr><td>iPad's adapter</td><td><code>192.168.10.2</code></td><td><code>255.255.255.0</code></td><td>leave empty</td></tr>
+  </table>
+
+  <div class="note"><b>Same network, different addresses.</b> Both ends share the first three
+  numbers, <code>192.168.10</code> — that is what makes them one network. Each end still needs its
+  own last number: the Mac is <code>.1</code>, the iPad is <code>.2</code>. Give both ends the same
+  address and the link will not work at all, even with the cable plugged in and everything else
+  right. No router or gateway is needed for a straight cable between two machines.
+  <p>Mac: System Settings → Network → the USB LAN adapter → Details → TCP/IP → Configure IPv4
+  <b>Manually</b>. iPad: Settings → Ethernet → the adapter → Configure IP → <b>Manual</b>.</p></div>
+
+  <table>
+    <tr><th>Link</th><th>Packet loss</th><th>Latency</th></tr>
+    <tr><td>Wired (adapters, direct cable)</td><td>0 of 100 pings</td><td>1 ms, steady</td></tr>
+    <tr><td>Wi-Fi</td><td>4 of 100 pings</td><td>spiking as high as 941 ms</td></tr>
+  </table>
+  <p>Measured on the rig. Wi-Fi is fine for the phone remote, which only polls once a second — it is
+  not fine for lighting, and the gap above is why a wire is worth running.</p>
+
+  <h3>Pointing the lighting software at the iPad</h3>
+  <p>Send Art-Net to <code>192.168.10.255</code> — the wired link's own broadcast address — or
+  straight to the iPad at <code>192.168.10.2</code>.</p>
+
+  <div class="warn"><b>If the software will only send to 127.0.0.1</b>, it is talking to itself, not
+  the iPad. Run <code>Scripts/artnet-relay.swift</code> on that Mac instead: it listens on port 6454
+  and forwards every Art-Net packet onto the network unchanged. <b>Run it in the foreground, from a
+  Terminal window on that Mac — never with <code>nohup</code>, and never backgrounded.</b> macOS 15
+  strips Local Network permission from a process detached from its own session, so a backgrounded
+  relay has every send to a LAN address refused with "No route to host" — while a ping to that same
+  address is flawless, which reads exactly like a network fault and is not one. Approve the Local
+  Network permission prompt the first time it appears.</div>
+
+  <h3>The one thing that costs an evening: App Nap</h3>
+  <div class="rule-box"><b>Keep the lighting application frontmost for the whole capture.</b> Some
+  lighting software stops sending properly the moment it is not the frontmost application on the
+  Mac — macOS quietly throttling its background timers, App Nap. On this rig it collapsed Art-Net
+  output from 44 frames a second to roughly one frame every six seconds. Nothing reports an error.
+  Nothing looks wrong. It reads exactly like a dead network, and it cost a whole evening to find
+  because every other part of the setup was correct. Before a show: quit the lighting application,
+  select it in Finder, press <b>⌘I</b>, tick <b>Prevent App Nap</b>, then reopen it — and do not
+  switch away from it on the Mac while a capture is running.</div>
+
+  <h3>A second symptom worth naming</h3>
+  <div class="warn"><b>"It works for about eight seconds, then stops"</b> is not a bad cable — it is
+  the Art-Net node timeout. A controller polls the network every few seconds and drops any device
+  that misses three replies in a row. The app now answers every poll and announces itself every four
+  seconds, so this should not come up again — but if traffic dies after roughly nine seconds, this is
+  what it is. Rescanning for devices in the lighting software brings it straight back.</div>
+
+  <h3>Check the link before you commit to a take</h3>
+  <p><b>Test DMX Input</b>, reached from the song's DMX row, plays nothing and saves nothing. It
+  exists purely to answer one question — is anything arriving, and from where.</p>
+  <table>
+    <tr><th>Column</th><th>What it shows</th></tr>
+    <tr><td>TIME</td><td>When this line was logged.</td></tr>
+    <tr><td>RATE</td><td>Frames a second actually arriving, right now.</td></tr>
+    <tr><td>UNIV</td><td>Which Art-Net universe the frame belongs to.</td></tr>
+    <tr><td>LIT</td><td>How many of the 512 channels in that frame are non-zero.</td></tr>
+    <tr><td>ART-NET</td><td>Valid Art-Net packets read, running total.</td></tr>
+    <tr><td>DATAGRAMS</td><td>Packets of any kind that have arrived on the port, valid Art-Net or not.</td></tr>
+  </table>
+  <p>A healthy link settles around 40–44 frames a second, with ART-NET and DATAGRAMS climbing
+  together. A dead one is exactly that: no new lines, RATE stuck at 0. Each line names the address
+  the frame arrived from, so wired traffic can be told apart from Wi-Fi at a glance. If DATAGRAMS
+  keeps climbing while ART-NET stays flat, something is arriving on the port that is not Art-Net —
+  worth chasing down before assuming the lighting rig itself is at fault.</p>
+
+  <h3>Doing the capture</h3>
+  <ol class="steps">
+    <li>Wire up, point the lighting software at the iPad, and check the rate on <b>Test DMX Input</b>
+    first. A take is only worth taking once the rate looks right.</li>
+    <li>Song editor → <b>DMX</b> → <b>Capture DMX</b>, then wait through <b>Getting the rig's
+    attention</b> — the iPad announces itself for a moment before the song starts. Starting the song
+    first, before that finishes, loses the opening seconds of lighting: nothing was listening for it
+    yet.</li>
+    <li>Let the iPad trigger your lighting software itself, over MIDI, exactly as it will on the
+    night — do not start it by hand.</li>
+    <li>Let the song run to its own end and stop cleanly, or stop it yourself once you have what you
+    need.</li>
+    <li>Read the summary, use <b>Sanity Check</b> to see the recorded activity under the song's own
+    waveform, then <b>Save</b>.</li>
+  </ol>
+
+  <h3>When a capture will not behave</h3>
+  <table>
+    <tr><th>What you see</th><th>Likely cause</th><th>Fix</th></tr>
+    <tr><td>Nothing arrives at all</td><td>Software sending to loopback, or the two machines are not really on one network</td><td>Point it at <code>192.168.10.255</code> or <code>.2</code> directly; confirm with a ping from the Mac first</td></tr>
+    <tr><td>"No route to host" from the relay, but ping works fine</td><td>Relay was started with <code>nohup</code> or left in the background; macOS pulled its Local Network permission</td><td>Run it in the foreground, in its own Terminal window; approve the permission prompt</td></tr>
+    <tr><td>Rate collapses to about one frame every six seconds</td><td>App Nap throttling the lighting application in the background</td><td>Keep it frontmost; tick Prevent App Nap in Finder's Get Info before opening it</td></tr>
+    <tr><td>Traffic dies after about eight or nine seconds</td><td>Art-Net node timeout — the controller dropped the iPad after missed polls</td><td>Rescan for devices in the lighting software</td></tr>
+    <tr><td>DATAGRAMS keeps climbing, ART-NET stays flat</td><td>Something that is not Art-Net is arriving on the port</td><td>Check what else on the network is sending to port 6454</td></tr>
+    <tr><td>Capture is missing its opening seconds</td><td>Song was started before the iPad finished announcing itself</td><td>Wait for "Getting the rig's attention" to finish before the song starts</td></tr>
+  </table>
+</section>
+
+<section class="chapter" id="ch13">
+  <div class="chapter-head"><span class="chapter-num">Chapter thirteen</span><h2>The phone</h2></div>
+  <p class="lede">The band sees the set on their own phones. Whoever holds the password can run the
+  show, and the mix, from there too.</p>
+
+  <p>There are two of these, and it is worth knowing which you want. <b>Remote mode</b> is this same
+  app on an iPhone, driving the show running on the iPad: it finds the tablet by itself, so there is
+  nothing to type. <b>The web remote</b> is a page the iPad serves, opened in any phone's browser —
+  no app to install, so anyone in the band can use it. Both are served by the iPad and both work
+  with no internet at all.</p>
+
+  <h3>Remote mode</h3>
+  <p>At the foot of the door list on an iPhone. It lists the tablets it can see, each row saying
+  which set that one has loaded, which is the fact worth knowing from across a room. Tap one and you
+  get the now-playing card, the setlist and the Play bar, drawn the same way Showtime draws them —
+  no video and no waveform, since the phone does not have the files and streaming them is the one
+  thing here that could cost the show something.</p>
+  <p>It asks for the password at the first command that needs one, not at the door, and remembers it
+  for that tablet. If the link drops it says so plainly, and says whether the show was playing when
+  it went — that sentence is the most important one in the mode, so it is only ever shown when it is
+  true. It locks itself after a minute untouched, because a phone in a pocket presses things.</p>
+
+  <h3>The web remote</h3>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-remote.jpg" loading="lazy" alt="Remote control card">
+    <figcaption><b>Settings → REMOTE CONTROL.</b> Serve the page, see the address to type, and set the
+    password that grants control.</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li>Turn <b>Serve the phone remote</b> on. The card shows an address.</li>
+    <li>Open that address in any phone's browser, on the same network. Nothing to install, and it works with no internet.</li>
+    <li>Watching needs no password: the setlist, what is armed, what is playing, time left.</li>
+    <li>Set a <b>remote password</b> to allow control - at least six characters. A phone types it
+    once and remembers it.</li>
+    <li>Changing the password revokes every phone that knew the old one.</li>
+  </ol>
+
+  <p>The remote can Play, Stop and cue a song, exactly as before. It now has a second screen too - a
+  SHOW/MIXER switch at the top of the page - carrying the same faders, mute and solo as the iPad's
+  own mixer, tracks then buses. Touch a fader on a phone and the same fader moves on the iPad at
+  once; watch the strip and you will see it happen, or catch it afterwards as a line in the Debug
+  screen's system event log naming which control a remote last changed and when. It still cannot
+  jump straight to another song while one is playing (Play Now), rename or reroute a bus, add or
+  remove one, or change anything under Settings.</p>
+
+  <div class="note"><b>Five wrong passwords from one phone in thirty seconds gets that phone refused
+  for a minute.</b> No lockout to clear from this end - it lifts on its own once the minute is
+  up.</div>
+
+  <p>The remote password cannot be the same as the stand password (chapter fourteen). The stand
+  address is a separate page for the rest of the band: it shows charts and score parts and can
+  control nothing.</p>
+</section>
+
+<section class="chapter" id="ch14">
+  <div class="chapter-head"><span class="chapter-num">Chapter fourteen</span><h2>Stands: charts and score parts</h2></div>
+  <p class="lede">Band members' own phones and tablets can show the current song's lyric-and-chord
+  chart, or their own page of the score. Read only. Nothing on a stand can touch the show.</p>
+
+  <div class="warn"><b>This is new, and only half built.</b> What works today: importing a chart and
+  PDF parts, serving them, and a stand that follows the armed song. What is not built yet: timing a
+  chart so it scrolls by itself, automatic page turns, a chart or score column in the import grid,
+  and a Stands line on Settings' NETWORK card. A chart stays still and the player scrolls it by
+  hand; score pages are turned by hand or by pedal.</div>
+
+  <h3>Two addresses, two jobs</h3>
+  <table>
+    <tr><th>Address</th><th>For</th><th>Can it control the show?</th></tr>
+    <tr><td>Remote Control (chapter thirteen)</td><td>Whoever runs the show or the mix from a phone</td><td>Yes, with the remote password.</td></tr>
+    <tr><td>Stand</td><td>Everyone else in the band</td><td>Never. It has no play, stop, cue or mix at all.</td></tr>
+  </table>
+  <p>Hand the stand address round freely. It never asks for the Remote Control password, so giving
+  it out never gives out the mixer.</p>
+
+  <h3>Adding a chart and parts to a song</h3>
+  <p>Open the song editor. The <b>CHART AND SCORES</b> section appears once the song has been saved
+  at least once. Changes here are written straight into the song folder, not held for the editor's
+  Save, and they are refused while the show plays.</p>
+  <ul>
+    <li><b>Chart.</b> Import one ChordPro file (<code>.cho</code>, <code>.chordpro</code>,
+    <code>.chopro</code>), plain-text lyrics (<code>.txt</code>) or an <code>.lrc</code> file.
+    Replace and Remove sit beside it. A file that is not readable text, is empty, has no lyric
+    lines, or is MusicXML is refused with a sentence saying which. ChordPro directives the app does
+    not use are listed, not hidden.</li>
+    <li><b>Score parts.</b> <b>Add a Score Part (PDF)</b>, then give it a part name - Keys,
+    Trumpet 1, whatever the player will look for. Every page is prepared on the spot ("Rendering
+    pages..."). A locked, unreadable or empty PDF, one over 40 pages, or a part name the song
+    already has, is refused. Each part can be renamed or removed.</li>
+  </ul>
+  <p>Charts and parts are part of the song folder, so a rig backup carries them. The prepared page
+  images are left out of a backup and rebuilt when needed.</p>
+
+  <figure>
+    <div class="placeholder">Picture still needed: the song editor's CHART AND SCORES section, with
+    a chart and two parts imported. Not yet taken - the section sits below the fold, and the
+    simulator used for this update could not be scrolled.</div>
+    <figcaption><b>CHART AND SCORES</b> in the song editor.</figcaption>
+  </figure>
+
+  <h3>Turning stands on</h3>
+  <ol class="steps">
+    <li>Settings, NETWORK group, <b>STANDS</b> card: turn on <b>Serve charts and scores to
+    stands</b>. It is off until you do. iOS may ask for local network permission the first time.</li>
+    <li>The card shows an address like <code>http://192.168.1.23:51828/</code>. Open it in any
+    browser on a stand, on the same network. Nothing to install, and no internet needed.</li>
+    <li>Optional: set a <b>stand password</b>, at least six characters. A stand types it once. It
+    must be different from the Remote Control password; the card refuses one that is the same.
+    Changing it sends every stand back to the password prompt and leaves Remote Control phones
+    alone. With no stand password, anyone on the network can read the charts, and nobody can
+    control anything.</li>
+    <li>The link choice on this card is shared with Remote Control: changing it on one changes it
+    for both.</li>
+  </ol>
+
+  <figure>
+    <div class="placeholder">Picture still needed: Settings' STANDS card, turned on, showing the
+    stand address and the password line. Not yet taken, for the same reason.</div>
+    <figcaption><b>Settings, STANDS.</b></figcaption>
+  </figure>
+  <figure>
+    <div class="placeholder">Picture still needed: the stand page itself on a phone and on a tablet,
+    showing a chart and a two-page score spread. It needs real devices on the rig's network.</div>
+    <figcaption><b>The stand page.</b></figcaption>
+  </figure>
+
+  <h3>On the stand</h3>
+  <ul>
+    <li>The page follows whichever song is armed on the iPad, and fetches the next one ahead of time.</li>
+    <li>Tap <b>Part</b> to choose <b>Chart</b> or a part by name. The stand remembers its own choice.</li>
+    <li>If the armed song has no part by that name, it says so - "No Keys part in this song" - and
+    lists what the song does have. It never shows another part instead.</li>
+    <li>A chart wraps to the screen with each chord above its word, and has a text size button
+    (small, medium, large).</li>
+    <li>A score shows one whole page upright, two pages side by side on a tablet turned sideways,
+    and one page to the width on a phone turned sideways. Turn with a tap on the right or left
+    edge, a swipe, the arrow keys, or a Bluetooth page-turner pedal.</li>
+    <li><b>Full</b> goes full screen where the browser allows it.</li>
+    <li>If the stand hears nothing from the iPad for three seconds it says "not connected" and keeps
+    showing what it has.</li>
+  </ul>
+  <div class="note"><b>Turn auto-lock off on each stand device.</b> A web page on the local network
+  cannot keep a phone or tablet awake by itself, so a stand left alone will go dark mid-song unless
+  its own screen lock is set to never.</div>
+</section>
+
+<section class="chapter" id="ch15">
+  <div class="chapter-head"><span class="chapter-num">Chapter fifteen</span><h2>Networks</h2></div>
+  <p class="lede">Only lighting and the remote need one. Audio, video and MIDI over DIN do not.</p>
+
+  <h3>Reading the link</h3>
+  <p>Settings → NETWORK says whether you are on a wired link, Wi-Fi or nothing, and what each service
+  is bound to. Debug → NETWORK lists every interface by name and address — the quickest way to tell
+  whether an adapter is really there.</p>
+
+  <h3>Pinning a service to a link</h3>
+  <p>Each of the three network users — DMX output, DMX capture, the remote — can be set to <b>any
+  link</b>, <b>wired only</b> or <b>Wi-Fi only</b>. Pinning lighting to wired means it will not
+  quietly fall back to Wi-Fi and stutter; a service pinned to a link that is not present says so
+  rather than pretending.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-troubleshooting.jpg" loading="lazy" alt="Network and rig cards">
+    <figcaption>The capture's own link choice sits on the NETWORK card, since capture is an action
+    rather than a setting with a card of its own.</figcaption>
+  </figure>
+
+  <h3>A wire for lights, Wi-Fi for everything else</h3>
+  <ol class="steps">
+    <li>A USB-C Ethernet adapter at each end, one cable between them, or both on a switch.</li>
+    <li>Fixed addresses: lighting machine <code>192.168.10.1</code>, iPad <code>192.168.10.2</code>, mask <code>255.255.255.0</code>, no router.</li>
+    <li>Restart the lighting software after the link is up — most only offer destinations whose interface existed when they started.</li>
+    <li>Leave Wi-Fi on. It carries MIDI and the phone remote at the same time.</li>
+  </ol>
+
+  <div class="note"><b>Why not just Wi-Fi?</b> An iPad's radio sleeps between bursts. A stream sent at
+  forty frames a second arrives in clumps and reads far lower, which shows up as lighting that lags
+  and then catches up. On a wire it simply arrives.</div>
+</section>
+
+<section class="chapter" id="ch16">
+  <div class="chapter-head"><span class="chapter-num">Chapter sixteen</span><h2>Backup, and moving iPads</h2></div>
+  <p class="lede">One file. Everything that matters. Nowhere near the internet.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-backup.jpg" loading="lazy" alt="Backup card">
+    <figcaption><b>Settings → BACKUP.</b> When you last backed up, a button to do it now, and a
+    button to restore.</figcaption>
+  </figure>
+
+  <h3>What is in it</h3>
+  <p>Every song folder whole — audio, MIDI, video, lighting, names, levels, waveforms — every set,
+  every backdrop, every design you dropped in, and the rig's own profile. Left out: where the show
+  last stopped, developer recordings and exported logs.</p>
+
+  <h3>Backing up</h3>
+  <ol class="steps">
+    <li><b>Back Up Now</b>. It checks there is room first.</li>
+    <li>Choose where it goes in the Files app — a USB stick, a cloud folder, anywhere you like.</li>
+    <li>It is refused while anything is playing.</li>
+  </ol>
+
+  <h3>Restoring</h3>
+  <ol class="steps">
+    <li><b>Restore…</b> and pick the file.</li>
+    <li>It shows what it would replace and what it would add before doing anything.</li>
+    <li><b>Rig settings come back only if you tick the box</b> — another iPad's outputs and MIDI
+    destination may not suit this one.</li>
+    <li>Nothing is moved into place until every part has been read, so a half-copied file leaves your
+    library untouched.</li>
+  </ol>
+</section>
+
+<section class="chapter" id="ch17">
+  <div class="chapter-head"><span class="chapter-num">Chapter seventeen</span><h2>Settings, area by area</h2></div>
+  <p class="lede">These describe the rig and stay on this device. A list of areas down the left, the
+  settings themselves on the right, and every one of them says what it does, when you would change
+  it, and what it would do to a running show.</p>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-video.jpg" loading="lazy" alt="The Settings screen">
+    <figcaption><b>Areas, not one long page.</b> A row carries its current value on the right, so
+    reading what something is set to costs nothing; the explanation and the control itself are
+    behind a tap on the row, because that is where the question gets asked.</figcaption>
+  </figure>
+
+  <h3>The two marks on a row</h3>
+  <p>They answer different questions and it is worth keeping them apart. The <b>effect mark</b> says
+  what changing this would do to a show that is playing right now:</p>
+  <table>
+    <tr><th>Mark</th><th>Means</th></tr>
+    <tr><td>Live</td><td>Reaches the stage the moment you change it, mid-song included.</td></tr>
+    <tr><td>Next song</td><td>Takes effect at the next song boundary, not before.</td></tr>
+    <tr><td>Locked while playing</td><td>Waits until the show stops. The row says so and states why, rather than going grey.</td></tr>
+    <tr><td>This screen only</td><td>Changes nothing the audience can hear or see.</td></tr>
+  </table>
+
+  <p>The <b>dot</b> beside the title says whether the thing itself is working: green when it is
+  plugged in and answering, amber when it wants a look, and absent when there is nothing to say.</p>
+
+  <div class="rule-box"><b>A rig where everything is fine has no amber anywhere.</b> That is the
+  point of the dot, and the reason "off on purpose" counts as neither working nor wrong. Before it,
+  a healthy rig still read as a page of warnings, because nothing on the screen was ever allowed to
+  say it was fine.</div>
+
+  <p>A few settings stage rather than apply: screen latency and the lighting delay collect their
+  steps and write them on <b>Save</b>, with <b>Revert</b> beside it, because nudging a number ten
+  times should not be ten writes to the rig. And four changes ask once before landing mid-show —
+  turning off video output, turning off lighting output, turning off the phone remote, and switching
+  the MIDI destination — since each one takes something away from a stage that is currently using
+  it.</p>
+
+  <h3>Tonight</h3>
+  <p>First, because it is what you touch on the night: rig status, the curfew, screen latency, Find
+  your outputs and the MIDI test note. Deliberately not lighting output or the phone remote — those
+  are set up once and left alone, and this area is for the things a venue changes.</p>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Rig status</td><td>What interface is connected, how many outputs it has, whether a screen is attached, and what routing this device remembers (chapter five).</td></tr>
+    <tr><td>Curfew</td><td>Whether to warn against one, and the time. Also editable from Showtime by tapping the banner.</td></tr>
+    <tr><td>Screen latency</td><td>How late the audience's screen shows a picture, in milliseconds, with the Sync Check to set it against (chapter eight).</td></tr>
+    <tr><td>Find your outputs</td><td>Plays a tone down one output at a time, so you know which is which. Refused while the show plays.</td></tr>
+    <tr><td>MIDI test note</td><td>Sends one note to the chosen destination, and says why if it cannot.</td></tr>
+  </table>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-tonight.jpg" loading="lazy" alt="The Tonight area of Settings">
+    <figcaption><b>The Tonight area.</b> The handful of settings a venue actually changes, in the
+    place you would look for them on the night.</figcaption>
+  </figure>
+
+  <h3>Audio</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Lead-in</td><td>Whether a song waits for its video or starts on time and clips it.</td></tr>
+    <tr><td>If the interface fails</td><td>Off by default. Where each bus lands on the iPad's own speaker if the interface goes — left, right, both or nowhere — so a dead interface is a smaller disaster than silence.</td></tr>
+  </table>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/settings-audio.jpg" loading="lazy" alt="The Audio area of Settings">
+    <figcaption><b>Audio.</b> Short, because almost everything about sound belongs to a song or to
+    the mixer rather than to the rig.</figcaption>
+  </figure>
+
+  <h3>Video</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Video output</td><td>Whether video is sent to the external screen at all. On by default.</td></tr>
+    <tr><td>Screen latency</td><td>The same setting as in Tonight, with the Sync Check beside it. One number for the rig; a song's own shift lives in its alignment window.</td></tr>
+    <tr><td>Video fade</td><td>The rig's own fade, which sets and songs may each override.</td></tr>
+    <tr><td>Backdrops</td><td>What plays when a song has no video of its own.</td></tr>
+  </table>
+
+  <h3>Lighting</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Send lighting</td><td>Art-Net out or not. Turning it on is what asks iOS for permission to reach the local network.</td></tr>
+    <tr><td>Node address and port</td><td>Where to send it. Committed when you leave the field, not per keystroke.</td></tr>
+    <tr><td>Find nodes</td><td>Asks the network who is out there and sets the address from the one you tap.</td></tr>
+    <tr><td>Rate</td><td>Match the recording, or a fixed 44 a second.</td></tr>
+    <tr><td>Lighting delay</td><td>This output's own hardware delay, staged and saved.</td></tr>
+  </table>
+
+  <h3>MIDI</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>MIDI destination</td><td>Where MIDI goes. It says whether it can actually reach what is named, rather than only which name is selected.</td></tr>
+    <tr><td>Test note</td><td>Proves the chain before a song does. The result is shown under the button, so a press that could not send looks different from one that worked.</td></tr>
+    <tr><td>Pedals and triggers</td><td>Which keys a footswitch sends and what they do; MIDI notes learned from the gear itself; and the guard window that ignores a second press too soon after the first.</td></tr>
+  </table>
+
+  <h3>Remote and stands</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Remote control</td><td>Serve the phone page, its address, and the remote password that grants control of the show and the mix.</td></tr>
+    <tr><td>Stands</td><td>Serve charts and score parts to the band's own devices, the stand address, and an optional stand password. Shares its link choice with Remote control (chapter fourteen).</td></tr>
+    <tr><td>Ready board</td><td>The shared "ready" page for band, FOH and monitors. It signals people and controls nothing.</td></tr>
+  </table>
+
+  <h3>Network</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Network</td><td>Wired, Wi-Fi or nothing, in plain words, and every interface actually present. No network is a valid rig, so this is never a fault.</td></tr>
+    <tr><td>Link per service</td><td>Lighting, a DMX capture and the remote can each be pinned to wired only or Wi-Fi only. A pinned service refuses the other link rather than quietly falling back.</td></tr>
+  </table>
+
+  <h3>Showtime screen</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Showtime style</td><td>Band or Solo. Solo is a chart-led screen for one performer; chapter seven covers both.</td></tr>
+    <tr><td>During a show</td><td>Keep the screen awake, the wall clock, time left in the set.</td></tr>
+    <tr><td>Beat flash</td><td>Around the whole screen or only the video pane, and how bright and how wide. Never shown on the external display.</td></tr>
+    <tr><td>Turn upright with the iPad</td><td>Whether the app follows the iPad's orientation. Off by default, and app-wide rather than per screen, because iPadOS turns every screen or none.</td></tr>
+    <tr><td>Confirm before Play now</td><td>Whether the Play now button asks first.</td></tr>
+  </table>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/settings-showtimeScreen.jpg" loading="lazy" alt="The Showtime screen area">
+    <figcaption><b>The beat flash</b> takes a strength and a size as well as a placement, so it can
+    be read across a stage or kept to a hint.</figcaption>
+  </figure>
+
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/settings-theme.jpg" loading="lazy" alt="The Theme area">
+    <figcaption><b>Themes differ in shape, depth and density</b>, not only colour: Poster, Studio,
+    Console, Blackout for a dark stage and Daylight for an afternoon set outdoors. A design dropped
+    into Files appears here with no rebuild.</figcaption>
+  </figure>
+
+  <h3>Theme, Backup and Troubleshooting</h3>
+  <table>
+    <tr><th>Setting</th><th>What it decides</th></tr>
+    <tr><td>Theme</td><td>The five built in, plus any design dropped into Files. Look for new designs picks those up; Export this design writes the current one out as a starting template.</td></tr>
+    <tr><td>Backup</td><td>Back up now, restore, and when you last did (chapter sixteen).</td></tr>
+    <tr><td>Send a report</td><td>Gathers the device, the rig and what went wrong into one message with the session log attached, and shows it to you before anything is sent.</td></tr>
+    <tr><td>Debug passphrase</td><td>With none set, Debug opens on a two-second hold. Set one for gigs where somebody else can reach the iPad.</td></tr>
+    <tr><td>Start the rig settings again</td><td>Two ways out of a rig state you cannot undo, narrower first: forget the remembered interfaces, or reset every rig setting. Neither touches your songs or sets, and each says what goes and what stays before doing it.</td></tr>
+  </table>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/settings-troubleshooting.jpg" loading="lazy" alt="The Troubleshooting area">
+    <figcaption><b>Troubleshooting.</b> Send a report first, because it is the one that gets used in
+    anger; the resets last, because they are the ones you want to have read about before pressing.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch18">
+  <div class="chapter-head"><span class="chapter-num">Chapter eighteen</span><h2>When something is wrong</h2></div>
+  <p class="lede">What it means, and what to send afterwards.</p>
+
+  <table>
+    <tr><th>What you see</th><th>What it means</th></tr>
+    <tr><td>A file you copied in isn't there</td><td>Tap <b>Rescan</b> on Songs. Files added behind the app's back are not noticed until something looks again.</td></tr>
+    <tr><td>DMX light grey</td><td>This song has no lighting. The light stays in place so "none here" never looks like "gone".</td></tr>
+    <tr><td>Capture says "nothing yet"</td><td>Packets are not reaching the iPad. Use <b>Test DMX Input</b> to separate the network from the capture.</td></tr>
+    <tr><td>Capture DMX greyed out</td><td>Something is playing, the app is still preparing, or there is no link — the reason is printed beside it.</td></tr>
+    <tr><td>Lighting slightly out</td><td>Open the song's alignment window and drag the DMX lane. Right is later. Save when it looks right.</td></tr>
+    <tr><td>Every song's video late by the same amount</td><td>That is screen latency, not the songs. Run the Sync Check in Settings (chapter eight).</td></tr>
+    <tr><td>One song's video out</td><td>Open that song's alignment window and drag the Video lane against the singer's mouth.</td></tr>
+    <tr><td>Save greyed out in the alignment window</td><td>Nothing new to save, or the show is playing. Stop the show; your edits are kept.</td></tr>
+    <tr><td>"Video will not be presented"</td><td>No screen attached, or video output is off in Settings.</td></tr>
+    <tr><td>MIDI arrives but nothing starts</td><td>Check which note the song sends and what the receiving machine is armed for. They are rarely the same across songs.</td></tr>
+    <tr><td>A track plays but no bus fader moves it</td><td>That track is sent somewhere this rig has no bus for, so it goes to the front-of-house bus. The mixer names which tracks, and ticking a bus on the track fixes it.</td></tr>
+    <tr><td>Lighting never sends</td><td>It holds until the first Play after launch, on purpose. Before that, "not sending" is correct.</td></tr>
+    <tr><td>The node cannot be found</td><td>Both ends have to be on one network, and a node fresh out of the box usually is not. <b>Find nodes</b> in Settings asks who is out there.</td></tr>
+    <tr><td>A bus is silent</td><td>A bus with no output chosen makes no sound anywhere — that is deliberate, so it can never appear in the wrong speakers. Tap its name plate in the mixer and give it one.</td></tr>
+    <tr><td>The rig is in a state you cannot undo</td><td>Settings → Troubleshooting has <b>Forget the remembered interfaces</b> and <b>Start the rig settings again</b>. Neither touches your songs or sets, and each says what goes and what stays before doing it.</td></tr>
+    <tr><td>Debug will not open</td><td>Hold it for two seconds. That is deliberate.</td></tr>
+  </table>
+
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/debug-screen.jpg" loading="lazy" alt="The debug screen">
+    <figcaption><b>Debug.</b> A dark, diagnostic screen: transport, setlist, buses, faults, readiness,
+    the video preview and the session log. It follows its own look rather than your theme, on
+    purpose.</figcaption>
+  </figure>
+
+  <p>Two panels on it are worth knowing about. The <b>system event log</b> carries MIDI, transport
+  and faults, filterable by kind and kept for the whole session rather than cleared at each stop.
+  <b>Diagnostics</b> carries the numbers behind the plain-words warnings — routing, meter health,
+  dropouts, timing.</p>
+
+  <div class="note"><b>After a bad gig</b>, export the session log from Debug and send it. It is saved
+  at every stop, never during playback, and the last five sessions are kept.</div>
+</section>
+
+<section class="chapter" id="ch19">
+  <div class="chapter-head"><span class="chapter-num">Chapter nineteen</span><h2>Appendices</h2></div>
+
+  <h3>A · What is on disk</h3>
+  <p>Everything the app writes is plain, versioned and yours. A song folder holds its audio, its
+  <code>midi.mid</code>, its <code>video.mp4</code>, its <code>song-lighting.dmx</code>, plus
+  <code>tracks.json</code> (names, order, levels, buses, offsets), <code>waveform.json</code> and
+  <code>levels.json</code>, and <code>video-filmstrip.bin</code> (the stills the alignment window
+  shows, rebuilt whenever needed). <code>tracks.json</code> also holds the song's alignment: its
+  video shift, DMX shift and markers. A song may also hold a chart file and PDF score parts, with
+  their prepared pages in a hidden <code>.score-pages</code> folder that a backup leaves out. Sets
+  live in <code>Playlists/</code>, backdrops in <code>Backdrops/</code>,
+  designs in <code>Designs/</code>, and the rig's own settings in <code>profile.json</code>.</p>
+
+  <h3>B · The themes</h3>
+  <p>Five ship, and each one answers a different working condition rather than a different taste in
+  colour. They differ in shape, depth, density and type as well — a theme is not a repaint.</p>
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/showtime-studio.jpg" loading="lazy" alt="Studio theme">
+    <figcaption><b>Studio</b>: light, square and flat, for a lit room.</figcaption>
+  </figure>
+  <figure>
+    <img src="{{basePath}}/assets/img/guide/showtime-console.jpg" loading="lazy" alt="Console theme">
+    <figcaption><b>Console</b>: dark graphite, rounded, with depth — a desk.</figcaption>
+  </figure>
+  <p><b>Blackout</b> is for a dark stage: near-black and warm, with the largest targets and type of
+  any of them. <b>Daylight</b> is the opposite problem, an afternoon set outdoors — a near-white
+  page with heavier strokes, because in sun a shadow carries nothing and stroke weight buys more
+  than point size. <b>Poster</b> is the default, and the one every other picture in this manual
+  uses. Any design dropped into Files appears beside them with no rebuild.</p>
+
+  <h3>C · The collapsed sidebar</h3>
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/build-doors-collapsed.jpg" loading="lazy" alt="Collapsed sidebar">
+    <figcaption>The sidebar narrows to an icon rail when you want the width, and the Showtime door
+    stays at its foot.</figcaption>
+  </figure>
+
+  <h3>D · Developer harnesses</h3>
+  <p>One screen exists for building the app rather than running a show, reached by launch argument
+  in a development build. The design gallery that used to sit beside it is gone: the two halves an
+  operator actually wanted from it — looking for new designs, and exporting the current one as a
+  template — are rows in Settings' Theme area instead.</p>
+  <figure class="half">
+    <img src="{{basePath}}/assets/img/guide/recording-viewer.jpg" loading="lazy" alt="Recording viewer">
+    <figcaption>The <b>recording viewer</b>: Showtime drawn from a recorded state, so a screen can be
+    checked at a desk with no rig at all.</figcaption>
+  </figure>
+
+  <h3>E · The rules, once more</h3>
+  <ul>
+    <li>One clock: the audio. Everything else follows it.</li>
+    <li>Nothing plays by itself, ever.</li>
+    <li>The mixer and the alignment window each have a Save, and nothing is written until you press
+    it. The one exception is a fader moved on the song that is playing: it is heard at once and
+    written when the show stops, never during it.</li>
+    <li>The alignment window's preview and the show never play at the same time.</li>
+    <li>Heavy work happens before the show, not during it.</li>
+    <li>Nothing needs the internet.</li>
+    <li>Your show data is plain, versioned files you can read and copy.</li>
+    <li>Anything that cannot be done right now says why.</li>
+  </ul>
+</section>
+
+<footer>
+  Show Sequencer - operator's manual, 25 September 2026. Written against the app as installed that
+  day. Every picture in it is taken by one script from a rig prepared by another, so the whole set
+  can be retaken after a redesign in a single run.
+  <p>Co-Authored-By: Claude Opus 5 &lt;noreply@anthropic.com&gt;</p>
+</footer>
+</div></body></html>
