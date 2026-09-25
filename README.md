@@ -37,6 +37,54 @@ Everything that changes between now and launch lives in `site.json`:
   back as a full URL (the feedback form's redirect after sending). It changes at the same time as
   `siteUrl` and `basePath`
 
+## Custom Domain
+
+The domain is `showarttechnologies.com`, registered through GoDaddy (nameservers
+`ns05`/`ns06.domaincontrol.com`). Note the spelling: the company is Show Arts Technologies, the
+domain is `showart` singular.
+
+**DNS first, then the repository.** Committing a `CNAME` file makes GitHub Pages set the custom
+domain and start redirecting the `github.io` address to it, so doing that before DNS resolves
+takes the working site down rather than moving it.
+
+In GoDaddy's DNS panel, on the apex record (`@`), replace whatever is parked there with these four
+A records, all four of them:
+
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+
+Optionally the same four as AAAA, for IPv6:
+
+```
+2606:50c0:8000::153
+2606:50c0:8001::153
+2606:50c0:8002::153
+2606:50c0:8003::153
+```
+
+And one CNAME so `www` works too:
+
+```
+www  ->  nicholashughesmusic-code.github.io
+```
+
+Check it has taken with `dig +short showarttechnologies.com` - the four GitHub addresses rather
+than the parked ones. Then set three values in `site.json` together, as the section above
+describes, and push:
+
+```json
+"siteUrl":    "https://showarttechnologies.com",
+"siteOrigin": "https://showarttechnologies.com",
+"basePath":   ""
+```
+
+GitHub then issues the certificate itself, which takes a few minutes. Tick "Enforce HTTPS" in the
+repository's Pages settings once it offers it.
+
 ## Deploy
 
 Every push to `main` builds and deploys to GitHub Pages (`.github/workflows/pages.yml`).
