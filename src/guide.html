@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+{{#unless launched}}<meta name="robots" content="noindex, nofollow">{{/unless}}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Show Sequencer — Operator's Guide</title>
+<style>
+  :root {
+    --bg: #0f0d12;
+    --surface: #17151c;
+    --raised: #201d27;
+    --line: #2e2a37;
+    --text: #f4f2f6;
+    --muted: #a8a2b4;
+    --faint: #6f697d;
+    --accent: #e81d2d;
+    --go: #1b6b2d;
+    --warn: #d9a021;
+    --info: #4cc9f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .page { max-width: 860px; margin: 0 auto; padding: 56px 28px 96px; }
+  header.title { border-bottom: 3px solid var(--accent); padding-bottom: 22px; margin-bottom: 34px; }
+  h1 {
+    font-family: "Anton", "Helvetica Neue", Impact, sans-serif;
+    font-weight: 400; font-stretch: condensed;
+    font-size: 54px; line-height: 1; letter-spacing: 0.5px; margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+  header.title p { margin: 0; color: var(--muted); }
+  h2 {
+    font-family: "Anton", "Helvetica Neue", Impact, sans-serif;
+    font-weight: 400; font-stretch: condensed; text-transform: uppercase;
+    font-size: 27px; letter-spacing: 0.4px;
+    margin: 44px 0 6px; padding-top: 18px; border-top: 1px solid var(--line);
+  }
+  h3 { font-size: 17px; margin: 26px 0 6px; letter-spacing: 0.2px; }
+  p, li { color: var(--text); }
+  p.lede { color: var(--muted); margin-top: 0; }
+  ol, ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  code { background: var(--raised); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; font-size: 13.5px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 18px 0; }
+  .card h3 { margin-top: 0; }
+  .rule { border-left: 3px solid var(--accent); background: var(--surface); padding: 12px 16px; margin: 18px 0; border-radius: 0 8px 8px 0; }
+  .rule strong { color: var(--accent); }
+  .tip { border-left: 3px solid var(--info); background: var(--surface); padding: 12px 16px; margin: 18px 0; border-radius: 0 8px 8px 0; }
+  .warn { border-left: 3px solid var(--warn); background: var(--surface); padding: 12px 16px; margin: 18px 0; border-radius: 0 8px 8px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--faint); font-weight: 600; text-transform: uppercase; font-size: 11.5px; letter-spacing: 1px; }
+  .label { display: inline-block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--faint); }
+  .contents { columns: 2; column-gap: 32px; }
+  .contents a { color: var(--text); text-decoration: none; display: block; padding: 3px 0; border-bottom: 1px solid transparent; }
+  .contents a:hover { border-bottom-color: var(--accent); }
+  .contents .num { color: var(--faint); display: inline-block; width: 26px; }
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--faint); font-size: 13px; }
+  @media print {
+    body { background: #fff; color: #111; }
+    .page { max-width: none; padding: 0 12mm; }
+    h1 { font-size: 40px; }
+    h2 { page-break-after: avoid; break-after: avoid; border-top-color: #ccc; }
+    h3 { page-break-after: avoid; break-after: avoid; }
+    .card, .rule, .tip, .warn, table { page-break-inside: avoid; break-inside: avoid; background: #f6f5f8; border-color: #ddd; }
+    p, li { color: #111; }
+    p.lede, td, th { color: #333; }
+    .label, footer, .contents .num { color: #666; }
+    code { background: #eee; border-color: #ddd; }
+    a, .contents a { color: #111; }
+    .contents { columns: 2; }
+    section { page-break-inside: auto; }
+    /* No forced breaks: a section that starts near the foot of a page is better than a page
+       half empty above it. `break-after: avoid` on the headings keeps a title with its text. */
+  }
+
+  figure { margin: 22px 0; }
+  figure img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+  }
+  figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  @media print {
+    figure img { border-color: #ddd; }
+    figcaption { color: #444; }
+    figure { page-break-inside: avoid; break-inside: avoid; }
+  }
+  .backlink { margin: 0 0 18px; font-size: 14px; }
+  .backlink a { color: var(--muted); text-decoration: none; }
+  .backlink a:hover { color: var(--text); }
+  @media print { .backlink { display: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<p class="backlink"><a href="{{basePath}}/">&larr; {{companyShort}}</a></p>
+<header class="title">
+  <span class="label">Operator's guide</span>
+  <h1>Show Sequencer</h1>
+  <p>Backing tracks, video, MIDI and lighting from one iPad, on one clock.</p>
+</header>
+
+<p class="lede">The short version. Every picture here is the app as it stands, on a rig with three
+songs and one set loaded — nothing staged. There is a longer manual if you want a chapter on
+something; this is the page to read first.</p>
+
+<div class="contents card">
+  <a href="#idea"><span class="num">1</span> The idea in one page</a>
+  <a href="#tonight"><span class="num">2</span> Tonight</a>
+  <a href="#songs"><span class="num">3</span> Getting songs in</a>
+  <a href="#sets"><span class="num">4</span> Sets</a>
+  <a href="#mixer"><span class="num">5</span> The mixer</a>
+  <a href="#showtime"><span class="num">6</span> Showtime</a>
+  <a href="#video"><span class="num">7</span> Video</a>
+  <a href="#midi"><span class="num">8</span> MIDI</a>
+  <a href="#lighting"><span class="num">9</span> Lighting</a>
+  <a href="#charts"><span class="num">10</span> Charts and stands</a>
+  <a href="#phone"><span class="num">11</span> Your phone</a>
+  <a href="#backup"><span class="num">12</span> Backup</a>
+  <a href="#settings"><span class="num">13</span> Settings</a>
+  <a href="#wrong"><span class="num">14</span> When something's wrong</a>
+  <a href="#rules"><span class="num">15</span> Rules the app always follows</a>
+</div>
+
+<section id="idea">
+<h2>1 · The idea in one page</h2>
+
+<p>Everything the show does runs from one clock: the audio. Video, MIDI and lighting follow it and
+can never push it around. That is why a song that drifts on other rigs stays put on this one.</p>
+
+<p>There are two modes, kept deliberately apart.</p>
+
+<div class="card">
+  <h3>Build</h3>
+  <p>Four doors — <strong>Songs</strong>, <strong>Sets</strong>, <strong>Mixer</strong>,
+  <strong>Settings</strong> — with <strong>Tonight</strong> above them. Each door says what is behind it
+  right now. This is where you import, name, set levels, build the running order and set the rig up.
+  The bar along the bottom shows what is playing and can start and stop it.</p>
+  <h3>Showtime</h3>
+  <p>One door at the foot. A fixed screen: the song, the timers, the setlist, the video, the buses
+  and one big Play bar. Nothing on it moves about, because a screen that rearranges itself is a
+  screen you cannot trust at the kit.</p>
+</div>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/songs-library.jpg" alt="Build mode with the four doors and the song list">
+  <figcaption>Build mode. The four doors down the left, each saying what is behind it, and the
+  Showtime door at the foot reading READY.</figcaption>
+</figure>
+
+<div class="rule">
+  <strong>Nothing ever starts itself.</strong> Not after a crash, not after a recovery, not when you
+  open a screen. The only things that start a song are your Play, your footswitch or pedal, and a
+  song the set says runs into the next one.
+</div>
+</section>
+
+<section id="tonight">
+<h2>2 · Tonight</h2>
+
+<p>The pre-show check, and the first thing on the list for a reason. It looks at the set, the rig
+and every bus, and tells you what will bite before the doors open rather than after.</p>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/tonight.jpg" alt="The Tonight screen showing the set, the rig and a line check">
+  <figcaption>Three columns: the set and whether every song has what it needs, the rig, and a line
+  check that walks the buses one at a time.</figcaption>
+</figure>
+
+<ul>
+  <li>The <strong>line check</strong> plays a tone down one bus at a time. Tap <em>Heard it</em> and
+  it moves on. It is the fastest honest way to find out which speaker is which.</li>
+  <li>A red line is something to fix. An amber one is worth a look. Going on with problems is
+  allowed — it asks first and lists them.</li>
+  <li>The Showtime door offers Tonight once per session when something is red, and never gets in
+  the way twice.</li>
+</ul>
+</section>
+
+<section id="songs">
+<h2>3 · Getting songs in</h2>
+
+<h3>What a song is</h3>
+<p>A folder with up to sixteen audio tracks, and optionally a video, a MIDI file, a lighting file, a
+chart and PDF parts. Every track is separate: its own fader, its own name, and its own destination.
+A stereo file arrives as two tracks, because two sides means two faders.</p>
+
+<h3>Two ways in</h3>
+<ul>
+  <li><strong>Import Songs</strong> on the Songs screen. Point it at a folder of exports and it opens
+  the grid: one row per song, one column per track position. There is a short video on that screen
+  showing exactly what it does.</li>
+  <li><strong>New Song</strong>, then add tracks one at a time in the song editor.</li>
+</ul>
+
+<p>You can also copy folders in with the Files app, since the app's Documents folder is exposed. If
+you add files while the app is running, tap <strong>Rescan</strong> — that is what tells it to look
+again.</p>
+
+<div class="tip">
+  <strong>Files picks one folder at a time.</strong> That is Apple's limit, not the app's. Choose the
+  first, then use <strong>Add Folders</strong> on the grid for the rest — they all import together.
+</div>
+
+<div class="warn">
+  <strong>Sample rates must agree.</strong> The first import sets the song's rate and anything else is
+  converted on the way in, so you hear about it now rather than at a gig.
+</div>
+
+<h3>The song editor</h3>
+<figure>
+  <img src="{{basePath}}/assets/img/guide/song-editor-top.jpg" alt="The song editor's name and audio sections">
+  <figcaption>Each track with its own name, its shape, where it goes and its level.</figcaption>
+</figure>
+
+<table>
+  <tr><th>Section</th><th>What it's for</th></tr>
+  <tr><td>Name</td><td>Numbered names sort into show order. Renaming also renames it in every set it is in.</td></tr>
+  <tr><td>Audio</td><td>Tracks in order, each with where it goes. Drag to reorder. Replace swaps a file and keeps the name and level.</td></tr>
+  <tr><td>Video</td><td>The song's own video. It tells you the file's frame rate and whether that will judder.</td></tr>
+  <tr><td>MIDI</td><td>The file sent to your destination, in time with the song.</td></tr>
+  <tr><td>DMX</td><td>Import a lighting file, or capture one live from the rig.</td></tr>
+  <tr><td>Alignment</td><td>Opens the alignment window, where video and lighting are lined up against the audio.</td></tr>
+  <tr><td>Lead-in</td><td>Whether the song waits for its video or starts on time and clips it.</td></tr>
+  <tr><td>Metronome</td><td>Off, the song's click track, a tempo you type, or the song's own MIDI tempo map.</td></tr>
+  <tr><td>Chart and scores</td><td>Words and chords, and PDF parts for the stands.</td></tr>
+</table>
+</section>
+
+<section id="sets">
+<h2>4 · Sets</h2>
+
+<p>A set is one night's running order. <strong>Sets</strong> is where you make, load and delete them;
+tapping one shows what is in it, and <em>Edit</em> opens it.</p>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/set-editor.jpg" alt="The set editor showing three songs with different start modes">
+  <figcaption>What happens between songs belongs to the set, not the song.</figcaption>
+</figure>
+
+<p>The same recording can wait for the singer in one set and run straight in on another, so each row
+chooses for itself:</p>
+
+<ul>
+  <li><strong>Wait</strong> — the show stops at the end and waits for you.</li>
+  <li><strong>Run in</strong> — the next song follows immediately.</li>
+  <li><strong>Run in after</strong> — the next song follows after a gap you set.</li>
+</ul>
+
+<p>A song can appear twice; that is what an encore is. With no set loaded the show plays everything
+on the iPad in name order, which is fine for a rehearsal.</p>
+</section>
+
+<section id="mixer">
+<h2>5 · The mixer</h2>
+
+<p>One mixer, reached three ways: the <strong>Mixer</strong> door, the song editor's Mixer button, and
+by tapping the song title on Showtime.</p>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/mixer-screen.jpg" alt="The mixer with track strips, bus strips and the song strip">
+  <figcaption>Tracks on the left belong to this song. Buses on the right belong to the rig and apply
+  to every song.</figcaption>
+</figure>
+
+<ul>
+  <li>The strip across the top moves you between songs in the set. It changes which song you are
+  <em>editing</em>, never which song will play.</li>
+  <li>Faders move by dragging the cap, never by a tap landing somewhere — a drumstick can knock a
+  screen. Double-tap a cap to put it back to 0&nbsp;dB.</li>
+  <li><strong>M</strong> and <strong>S</strong> are live listening aids and are never saved. Showtime
+  says <em>MUTE/SOLO ACTIVE · Clear</em> whenever any are on, so you cannot leave one up by accident.</li>
+  <li><strong>Listen</strong> plays the song here, through the alignment window's own preview, only
+  while the show is stopped.</li>
+  <li>Tap a track's name plate to rename it; tap a bus's to rename it or send it somewhere else.</li>
+</ul>
+
+<div class="rule">
+  <strong>The mixer has a Save.</strong> Changes are a draft until you press it, and Done asks if you
+  have not. The exception is the song that is playing right now: a fader you move there is heard at
+  once and written to the song when the show stops, never during it.
+</div>
+</section>
+
+<section id="showtime">
+<h2>6 · Showtime</h2>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/showtime-real.jpg" alt="The Showtime screen, armed and ready">
+  <figcaption>Armed and ready. One green bar, and it is that size on purpose.</figcaption>
+</figure>
+
+<table>
+  <tr><th>Where</th><th>What</th></tr>
+  <tr><td>Top bar</td><td>The set, the time, and a dot each for AUDIO, SCREEN, MIDI, LIGHTS and DMX. Green means working, amber means look at it, grey means there is nothing to say. Then Settings, Debug and Exit.</td></tr>
+  <tr><td>Now playing</td><td>Song, timers, and under the title what comes next and how it starts. Tap the title for the mixer; hold it for more.</td></tr>
+  <tr><td>Waveform</td><td>The whole song with the playhead.</td></tr>
+  <tr><td>Video</td><td>What the audience sees.</td></tr>
+  <tr><td>Buses</td><td>Output faders with meters, M and S. Tap BUSES for the large mixer.</td></tr>
+  <tr><td>Setlist</td><td>Tap a song to cue it. It scrolls itself as the set moves on.</td></tr>
+  <tr><td>Play bar</td><td>The one big control. Green to play, red while playing.</td></tr>
+</table>
+
+<div class="rule">
+  <strong>A tap on the setlist cues. It never starts.</strong> When something is cued, a
+  <strong>Play now</strong> button slides in beside the Play bar — that one stops what is playing and
+  starts the cued song at once. Those are the only two places a finger changes what the audience
+  hears.
+</div>
+
+<h3>The beat border</h3>
+<p>The edge of the screen flashes on the beat, the downbeat marked differently, from whichever source
+the song's metronome setting names. Settings chooses whether it frames the whole screen or only the
+video, and how bright and how wide it is. It is never shown on the external display.</p>
+
+<h3>Leaving</h3>
+<p>Exit asks first, and offers to <strong>leave the show playing</strong> — you drop back to Build mode
+with the bottom bar still running the song. Debug needs a press and hold of about two seconds; a
+stray tap does nothing. Set a passphrase in Settings if someone else can reach the iPad at a gig.</p>
+</section>
+
+<section id="video">
+<h2>7 · Video</h2>
+
+<ul>
+  <li>Plug the display in before the show. The app holds a surface open so a song can start instantly.</li>
+  <li>A song with no video of its own shows the <strong>backdrop</strong> — a still or a loop, set per
+  rig and optionally per set.</li>
+  <li><strong>Fades</strong> are rig-wide by default, overridable per set, and per song for the way it
+  arrives and the way it leaves.</li>
+  <li><strong>Screen latency</strong> in Settings compensates a projector that is always late. A song
+  whose file was exported wrong gets its own offset in the alignment window instead.</li>
+</ul>
+
+<div class="warn">
+  <strong>Export at 30&nbsp;fps if you can.</strong> 30 divides evenly into 60&nbsp;Hz and 120&nbsp;Hz,
+  so it never judders. 24&nbsp;fps does not divide into 60, which is most projectors, and shows as a
+  slight stutter on movement. The song editor tells you what your own file is.
+</div>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/alignment-window.jpg" alt="The song alignment window with the video lane shifted">
+  <figcaption>The alignment window: the audio fixed as the clock, video and lighting as clips you drag
+  into line against it.</figcaption>
+</figure>
+
+<p>Audio is the clock and cannot be moved. Drag the video or lighting clip to shift it, drag the ruler
+to move the playhead, pinch to zoom, and press Play to watch it. Nothing is written until you press
+<strong>Save</strong>.</p>
+</section>
+
+<section id="midi">
+<h2>8 · MIDI</h2>
+
+<p>On stage this is what starts Ableton, changes patches, or both. A song's MIDI file plays in time
+with the song, from the same clock.</p>
+
+<p><strong>The simplest way to reach a Mac is a cable</strong> — your interface's own MIDI out. Nothing
+to pair, nothing to set up. Wireless is the fallback for when that port is spoken for, and there is a
+video in Settings → MIDI that walks through the pairing, which happens entirely on the Mac.</p>
+
+<p>Pick the destination in Settings and send the test note to prove the chain before the first song
+does it for you. If it cannot send, it says why rather than looking like it worked.</p>
+</section>
+
+<section id="lighting">
+<h2>9 · Lighting</h2>
+
+<p>DMX here means any DMX, not only lamps — hazers, motors, anything on the same wire.</p>
+
+<h3>Getting it talking</h3>
+<div class="rule">
+  <strong>One rule: everything on one network.</strong> The same first three numbers, a different last
+  one, and the same subnet mask. That is the whole of it.
+</div>
+
+<p>Whether that is the iPad, a travel router and the node, or just one cable from the iPad to the node,
+is a question about spare ports rather than about networking. There is a video in Settings → Lighting
+that walks through both.</p>
+
+<div class="warn">
+  <strong>Nodes often arrive on 10.0.0.something.</strong> That is old Art-Net, not a fault — but it
+  cannot hear a 192.168 network, and nothing will tell you. Change one end so they match.
+</div>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/settings-find-nodes.jpg" alt="Find nodes listing two Art-Net nodes">
+  <figcaption><strong>Find nodes</strong> asks the network who is out there. Tap yours and it is set.</figcaption>
+</figure>
+
+<p>Settings → Lighting also sets the rate and a latency offset. The app holds the last look when you
+stop and between songs, and sends nothing at all until the first Play after launch — set the node to
+hold on signal loss and a crash leaves the stage lit.</p>
+
+<h3>Capturing your lighting show</h3>
+<p>A capture is a <strong>round trip</strong>, which is why your lighting software has to be running:
+the song's own MIDI note fires your usual cue, your lights answer with Art-Net, and the iPad records
+what arrives against song time. Nothing is copied off the Mac.</p>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/dmx-capture-running.jpg" alt="A DMX capture running, with live universes and a log">
+  <figcaption>Play the song once. That is the capture. It stops itself at the end, then you check it
+  and Save.</figcaption>
+</figure>
+
+<div class="tip">
+  <strong>Use a wire for the capture if you can.</strong> Wi-Fi batches packets, so a capture over it
+  may stutter on fast fades. The app labels a capture that came in over Wi-Fi.
+</div>
+</section>
+
+<section id="charts">
+<h2>10 · Charts and stands</h2>
+
+<p>A song can carry a chart — words and chords — and any number of PDF score parts. Switch
+<strong>Stands</strong> on in Settings and the address it shows opens on any phone or tablet on the
+same network: the chart follows the song, parts turn by tap, swipe or a page-turn pedal.</p>
+
+<p>Nobody can control the show from a stand. It is a window, not a remote.</p>
+
+<p>A chart can be <strong>timed</strong> by tapping along once while the song plays. After that it
+scrolls itself and highlights the line you are on.</p>
+</section>
+
+<section id="phone">
+<h2>11 · Your phone</h2>
+
+<p>Two different things, and it is worth knowing which you want.</p>
+
+<table>
+  <tr><th></th><th>What it is</th></tr>
+  <tr><td><strong>Remote mode</strong></td><td>The app on your iPhone, driving the show running on the iPad. It finds the tablet by itself — nothing to type.</td></tr>
+  <tr><td><strong>The web remote</strong></td><td>A page the iPad serves, opened in any phone's browser. No app needed, so anyone in the band can use it.</td></tr>
+</table>
+
+<ul>
+  <li>Watching needs nothing: the setlist, what is armed, what is playing, time left.</li>
+  <li><strong>Controlling needs the remote password</strong>, typed once on that phone and remembered.</li>
+  <li>Play, Stop, cueing — and the mixer: track and bus levels, mute and solo.</li>
+  <li>Changing the password revokes every phone that remembered the old one.</li>
+</ul>
+
+<p>Everything is served by the iPad, so it works with no internet at all. A dead phone backstage
+strands nobody: anyone else can type the password and take over.</p>
+</section>
+
+<section id="backup">
+<h2>12 · Backup</h2>
+
+<p>Settings → Backup. <strong>Back Up Now</strong> writes one file and hands it to the Files app, so you
+choose where it goes — the app never uploads anything anywhere. It shows a progress bar, because on a
+real library it takes a while, and tells you where it went and how big it is when it is done.</p>
+
+<p>It holds every song whole, every set, every backdrop, every design you dropped in, and the rig's own
+settings. <strong>Restore…</strong> shows what it would replace and what it would add before doing
+anything; rig settings come back only if you tick the box, because another iPad's outputs may differ.</p>
+
+<p>Both are refused while anything is playing.</p>
+</section>
+
+<section id="settings">
+<h2>13 · Settings</h2>
+
+<p>A list of areas down the left, the settings themselves on the right. Every setting says what it
+does, when you would change it, and — the important one — <strong>what it would do to a running
+show</strong>.</p>
+
+<figure>
+  <img src="{{basePath}}/assets/img/guide/settings-video.jpg" alt="The Settings screen showing the areas list and the Video area">
+  <figcaption>Each row carries its current value, a mark saying whether it is safe mid-show, and a dot
+  saying whether the thing works.</figcaption>
+</figure>
+
+<table>
+  <tr><th>Mark</th><th>Means</th></tr>
+  <tr><td>Live</td><td>Reaches the stage the moment you change it, even mid-song.</td></tr>
+  <tr><td>Next song</td><td>Takes effect at the next song boundary.</td></tr>
+  <tr><td>Locked while playing</td><td>Waits until the show stops. It says so rather than going grey.</td></tr>
+  <tr><td>This screen only</td><td>Changes nothing the audience can hear or see.</td></tr>
+</table>
+
+<p>The areas: <strong>Tonight</strong>, <strong>Audio</strong>, <strong>Video</strong>,
+<strong>Lighting</strong>, <strong>MIDI</strong>, <strong>Remote and stands</strong>,
+<strong>Network</strong>, <strong>Showtime screen</strong>, <strong>Theme</strong>,
+<strong>Backup</strong> and <strong>Troubleshooting</strong>.</p>
+
+<div class="tip">
+  <strong>Green means it works.</strong> A dot beside a row is green when the thing it names is
+  plugged in and answering, amber when it wants a look, and absent when there is nothing to say. A rig
+  where everything is fine has no amber anywhere.
+</div>
+</section>
+
+<section id="wrong">
+<h2>14 · When something's wrong</h2>
+
+<table>
+  <tr><th>What you see</th><th>What it means</th></tr>
+  <tr><td>A new file isn't there</td><td>Tap <strong>Rescan</strong> on the Songs screen. Files copied in behind the app's back are not noticed until something looks again.</td></tr>
+  <tr><td>A track plays but no bus fader moves it</td><td>That track is sent somewhere this rig has no bus for, so it goes to the front-of-house bus. The mixer says which tracks, and ticking a bus on the track fixes it.</td></tr>
+  <tr><td>Lighting never sends</td><td>It holds until the first Play after launch, on purpose. Before that, "not sending" is correct.</td></tr>
+  <tr><td>The node cannot be found</td><td>Check both ends are on one network. A node fresh out of the box usually is not.</td></tr>
+  <tr><td>Capture shows nothing arriving</td><td>Packets are not reaching the iPad. Broadcast, or add an output aimed at the iPad's own address.</td></tr>
+  <tr><td>Capture DMX is greyed out</td><td>The show is playing, the app is still preparing, or there is no network. It says which.</td></tr>
+  <tr><td>Video won't be presented</td><td>No display attached, or video output is off in Settings.</td></tr>
+  <tr><td>The rig is in a state you cannot undo</td><td>Settings → Troubleshooting has <em>Forget the remembered interfaces</em> and <em>Start the rig settings again</em>. Neither touches your songs or sets.</td></tr>
+  <tr><td>Debug won't open</td><td>Hold it for two seconds. That is deliberate.</td></tr>
+</table>
+
+<p>Settings → Troubleshooting → <strong>Send a report</strong> gathers the device, the rig and what went
+wrong into one message with the session log attached. It shows you the whole thing before it sends
+anything, and it carries no song names or file paths.</p>
+</section>
+
+<section id="rules">
+<h2>15 · Rules the app always follows</h2>
+<ul>
+  <li>One clock: the audio. Everything else follows it.</li>
+  <li>Nothing plays by itself, ever.</li>
+  <li>Heavy work happens before the show, not during it.</li>
+  <li>Nothing needs the internet.</li>
+  <li>Your show data is plain, versioned files you can read and copy.</li>
+  <li>Anything that cannot be done right now says why, rather than failing quietly.</li>
+  <li>Reliability beats features, and beats how it looks.</li>
+</ul>
+</section>
+
+<footer>
+  Show Sequencer — operator's guide, 25 September 2026. Written against the app as installed that day.
+  Written against the app as installed that day, and kept in step with it.
+</footer>
+
+</div>
+</body>
+</html>
