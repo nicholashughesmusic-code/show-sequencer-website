@@ -52,6 +52,21 @@ p.lead { font-size: clamp(19px, 2vw, 22px); color: var(--t1); }
 .device.phone { max-width: 300px; margin: 0 auto; border-radius: 40px; padding: 10px; }
 .device.phone img { border-radius: 30px; }
 .device-wrap { margin: 0; }
+/* The hero's pair: the iPad as it always was, with the phone standing in front of its lower
+   right corner, the way the two actually sit on a desk. The phone is positioned rather than
+   laid out, so the iPad keeps the column's full width and the caption still sits under both.
+   Percentages throughout, so the pair scales as one thing at every width. */
+/* The devices sit in their own box so the phone can hang below the iPad without standing on
+   the caption, which is a sibling underneath the pair rather than part of it. */
+.device-wrap.duo .pair { position: relative; padding-bottom: 7%; }
+.device-wrap.duo .device.tablet { width: 88%; }
+.device-wrap.duo .device.phone.inset {
+  position: absolute; right: 0; bottom: 0; width: 27%; max-width: none; margin: 0;
+  border-radius: 8%/3.7%; padding: 2%;
+  box-shadow: 0 30px 60px -20px #000, 0 0 0 1px #3b3544;
+}
+.device-wrap.duo .device.phone.inset img { border-radius: 6%/2.8%; }
+.device-wrap.duo figcaption { margin-top: 14px; }
 .device-wrap figcaption, .gig figcaption { font-size: 12px; color: var(--t3); margin-top: 10px; text-align: center; }
 .gig { margin: 12px 0 0; }
 .gig img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
@@ -116,6 +131,11 @@ footer a { color: var(--t2); text-decoration: none; }
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
+  /* Overlapping two devices inside a 328pt column leaves neither readable, so the phone comes
+     out from in front of the iPad and sits beside it. */
+  .device-wrap.duo .pair { padding-bottom: 0; display: flex; align-items: flex-end; gap: 10px; }
+  .device-wrap.duo .device.tablet { width: auto; flex: 1 1 0; min-width: 0; }
+  .device-wrap.duo .device.phone.inset { position: static; width: 26%; flex: none; }
   .choice .options { flex-direction: column; align-items: stretch; }
   form.report .btn { align-self: stretch; }
   .wrap { padding-inline: 16px; }
