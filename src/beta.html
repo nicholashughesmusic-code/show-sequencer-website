@@ -108,7 +108,7 @@
 <section class="band">
   <div class="wrap prose">
     {{#if betaFormUrl}}<div class="ctas"><a class="btn primary" href="{{betaFormUrl}}">Apply for the beta</a></div>{{/if}}
-    {{#unless betaFormUrl}}<div class="notice">Applications open soon. Until then, if you play live regularly and want to be in the first group, say so through <a href="{{basePath}}/feedback/">the feedback form</a> and we will come back to you when it opens.</div>{{/unless}}
+    {{#unless betaFormUrl}}<div class="notice"><b>Applications are open.</b> If you play live regularly and want to be in the first group, send your name and the email address your Apple ID uses to <a href="mailto:{{contactEmail}}">{{contactEmail}}</a>, or say so through <a href="{{basePath}}/feedback/">the feedback form</a>. An invitation comes back by email, and it needs that address to reach you. Tell us what you play and what you run it on - it helps to know which rigs are being tested on.</div>{{/unless}}
   </div>
 </section>
 {{> foot}}

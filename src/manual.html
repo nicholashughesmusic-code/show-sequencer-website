@@ -91,7 +91,7 @@
     <li>Getting songs in<span class="sub">The import grid, the song editor, every control</span></li>
     <li>Sets<span class="sub">Running orders, what happens between songs, backdrops</span></li>
     <li>Routing and the mixer<span class="sub">Buses, outputs, levels, mute and solo</span></li>
-    <li>Tonight<span class="sub">The pre-show check: the set, the rig, and a line check per bus</span></li>
+    <li>Line Check<span class="sub">The pre-show check: the set, the rig, and a line check per bus</span></li>
     <li>Showtime<span class="sub">Every pane, every control, and how a show runs</span></li>
     <li>Video<span class="sub">Attaching a screen, fades, screen latency and the Sync Check</span></li>
     <li>The song alignment window<span class="sub">Lining a song's video and lighting up against its audio, with a preview, markers and an explicit Save</span></li>
@@ -142,7 +142,7 @@
   <figure>
     <img src="{{basePath}}/assets/img/guide/build-doors.jpg" loading="lazy" alt="The Build sidebar">
     <figcaption><b>Four doors.</b> Songs, Sets, Mixer and Settings, each saying what is behind it
-    right now, with Tonight above them and the Showtime door pinned at the foot. It collapses to an
+    right now, with Line Check above them and the Showtime door pinned at the foot. It collapses to an
     icon rail when you want the width.</figcaption>
   </figure>
 
@@ -164,7 +164,7 @@
     <li>Attach the screen if you are using one, before the show rather than between songs.</li>
     <li>Open the app. It prepares in the background; the Showtime door says READY when it is done.</li>
     <li>Load the set you are playing. With no set loaded the show plays the library in name order.</li>
-    <li>Open <b>Tonight</b> and walk it. It checks the set, the rig and every bus, and says what will
+    <li>Open <b>Line Check</b> and walk it. It checks the set, the rig and every bus, and says what will
     bite before the doors open rather than after. Chapter two covers it.</li>
     <li>Check the status lights on Showtime: audio, screen, MIDI, lights and DMX.</li>
     <li>Play the first song from the Play bar or the footswitch.</li>
@@ -501,17 +501,17 @@
 </section>
 
 <section class="chapter" id="ch6">
-  <div class="chapter-head"><span class="chapter-num">Chapter six</span><h2>Tonight</h2></div>
+  <div class="chapter-head"><span class="chapter-num">Chapter six</span><h2>Line Check</h2></div>
   <p class="lede">The check that runs before the doors open, so the surprises happen while there is
   still time to do something about them.</p>
 
-  <p>Tonight sits above the four doors, at the top of the sidebar, and it is first for a reason: it
+  <p>Line Check sits above the four doors, at the top of the sidebar, and it is first for a reason: it
   is the one screen that looks at the whole rig at once and tells you what is wrong in plain words.
   The Showtime door offers it once per session when something is red, and never gets in the way a
   second time.</p>
 
   <figure>
-    <img src="{{basePath}}/assets/img/guide/tonight.jpg" loading="lazy" alt="The Tonight screen">
+    <img src="{{basePath}}/assets/img/guide/tonight.jpg" loading="lazy" alt="The Line Check screen">
     <figcaption><b>Three columns.</b> The set and whether every song has what it needs, the rig
     itself, and a line check that walks the buses one at a time.</figcaption>
   </figure>
@@ -535,7 +535,7 @@
   <h3>The line check</h3>
   <p>A row per bus. Ping plays a tone down that bus alone for a couple of seconds; tap <b>Heard
   it</b> and it moves to the next. It is the fastest honest way to find out which speaker is which,
-  and it is the only part of Tonight that makes a noise. It stops on its own if the show starts.</p>
+  and it is the only part of Line Check that makes a noise. It stops on its own if the show starts.</p>
   <p>A MIDI row after the buses sends the same test note Settings does. It is graded manually and
   never blocks anything, because a MIDI destination that is not answering is a normal state for a
   rig that does not use one.</p>
@@ -545,7 +545,7 @@
   then takes you to Showtime. The check is advice from something that can see the whole rig at once,
   not a gate.</p>
 
-  <p>Under the Tonight row in the sidebar is when it was last looked at — "Checked 18 minutes ago",
+  <p>Under the Line Check row in the sidebar is when it was last looked at — "Checked 18 minutes ago",
   or, past six hours, a reminder that it no longer counts for tonight. Opening it by hand is free and
   changes nothing; loading a set or relaunching the app arms the door's one offer again.</p>
 </section>
@@ -1392,7 +1392,7 @@
   the MIDI destination — since each one takes something away from a stage that is currently using
   it.</p>
 
-  <h3>Tonight</h3>
+  <h3>Line Check</h3>
   <p>First, because it is what you touch on the night: rig status, the curfew, screen latency, Find
   your outputs and the MIDI test note. Deliberately not lighting output or the phone remote — those
   are set up once and left alone, and this area is for the things a venue changes.</p>
@@ -1406,8 +1406,8 @@
   </table>
 
   <figure>
-    <img src="{{basePath}}/assets/img/guide/settings-tonight.jpg" loading="lazy" alt="The Tonight area of Settings">
-    <figcaption><b>The Tonight area.</b> The handful of settings a venue actually changes, in the
+    <img src="{{basePath}}/assets/img/guide/settings-tonight.jpg" loading="lazy" alt="The Line Check area of Settings">
+    <figcaption><b>The Line Check area.</b> The handful of settings a venue actually changes, in the
     place you would look for them on the night.</figcaption>
   </figure>
 
@@ -1428,7 +1428,7 @@
   <table>
     <tr><th>Setting</th><th>What it decides</th></tr>
     <tr><td>Video output</td><td>Whether video is sent to the external screen at all. On by default.</td></tr>
-    <tr><td>Screen latency</td><td>The same setting as in Tonight, with the Sync Check beside it. One number for the rig; a song's own shift lives in its alignment window.</td></tr>
+    <tr><td>Screen latency</td><td>The same setting as in Line Check, with the Sync Check beside it. One number for the rig; a song's own shift lives in its alignment window.</td></tr>
     <tr><td>Video fade</td><td>The rig's own fade, which sets and songs may each override.</td></tr>
     <tr><td>Backdrops</td><td>What plays when a song has no video of its own.</td></tr>
   </table>
