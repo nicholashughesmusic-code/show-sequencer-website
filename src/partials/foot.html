@@ -1,7 +1,12 @@
 </main>
 <footer>
   <div class="wrap">
-    <div>{{companyName}} ({{companyNote}}). {{productName}} is a working name.</div>
+    <div class="legal">
+      <b>{{companyShort}}</b> is a trading name of {{companyName}}, a company registered in
+      {{companyRegisteredIn}}, company number {{companyNumber}}.{{#if companyOffice}}
+      Registered office: {{companyOffice}}.{{/if}}
+      {{#if productIsWorkingName}}{{productName}} is a working name.{{/if}}
+    </div>
     <nav aria-label="Footer">
       {{#if manualUrl}}<a href="{{manualUrl}}">Manual</a>{{/if}}
       <a href="{{basePath}}/beta/">Join the beta</a>
