@@ -5,7 +5,9 @@
       <b>{{companyShort}}</b> is a trading name of {{companyName}}, a company registered in
       {{companyRegisteredIn}}, company number {{companyNumber}}.{{#if companyOffice}}
       Registered office: {{companyOffice}}.{{/if}}
-      {{#if productIsWorkingName}}{{productName}} is a working name.{{/if}}
+      {{#if productIsWorkingName}}{{productName}} is a working name.{{/if}}{{#if productTrademarkApplication}}
+      {{productNameTM}} is a trademark of {{companyName}}, UK application
+      {{productTrademarkApplication}}, pending.{{/if}}
     </div>
     <nav aria-label="Footer">
       {{#if manualUrl}}<a href="{{manualUrl}}">Manual</a>{{/if}}

@@ -1,6 +1,6 @@
 # Show Arts Website
 
-The public website for Show Arts and its first product, working name Show Sequencer.
+The public website for Show Arts and its first product, EZRig.
 
 This repository holds public website assets only. Application source, internal documentation and
 specifications live elsewhere and are never copied here.

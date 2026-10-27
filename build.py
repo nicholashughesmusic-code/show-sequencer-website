@@ -22,6 +22,12 @@ def load_site():
     name = site["productName"]
     site["productFirstMention"] = name + (" (working name)" if site.get("productIsWorkingName") else "")
     site["productUpper"] = name.upper()
+    # The mark itself, for prominent use: mastheads, document titles and the footer notice. Body
+    # prose uses the bare {{productName}}, which is ordinary trademark practice - a symbol on every
+    # mention reads as shouting and protects nothing extra. The application is pending, so this is
+    # (TM) and never the registered symbol.
+    site["productNameTM"] = name + "<sup>&trade;</sup>"
+    site["productUpperTM"] = name.upper() + "<sup>&trade;</sup>"
     site["year"] = "2026"
     site.setdefault("basePath", "")
     with open(os.path.join(ROOT, "assets", "css", "site.css"), "rb") as f:
