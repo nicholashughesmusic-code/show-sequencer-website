@@ -8,12 +8,12 @@
   "productIsWorkingName": false,
   "launched": true,
   "productTrademarkApplication": "UK00004465361",
-  "siteUrl": "",
-  "siteOrigin": "https://nicholashughesmusic-code.github.io",
-  "basePath": "/show-sequencer-website",
+  "siteUrl": "https://showarttechnologies.com",
+  "siteOrigin": "https://showarttechnologies.com",
+  "basePath": "",
   "betaFormUrl": "",
   "updatesFormUrl": "",
-  "manualUrl": "/show-sequencer-website/manual/",
+  "manualUrl": "/manual/",
   "contactEmail": "support@showarttechnologies.com",
-  "guideUrl": "/show-sequencer-website/guide/"
+  "guideUrl": "/guide/"
 }
