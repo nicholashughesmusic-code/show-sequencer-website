@@ -2,6 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{productName}} &mdash; The Manual</title>
 <style>
   :root {
@@ -61,6 +62,13 @@
   .toc > ol > li::before { content: counter(toc) ". "; color: var(--accent); font-weight: 700; }
   .toc .sub { color: var(--ink-faint); font-size: 9.6pt; display: block; padding-left: 14pt; }
   @page { size: A4; margin: 16mm 12mm 18mm; }
+  /* A phone is not an A4 sheet. The cover fills a page on paper, which on a narrow
+     screen opens the manual on a screenful of nothing, so there it is an ordinary
+     block. Print and the desktop width are untouched: the breakpoint sits below
+     .book's own 190mm, where the page is already narrower than its maximum. */
+  @media screen and (max-width: 700px) {
+    .cover { height: auto; padding: 18pt 0 10pt; }
+  }
   .backlink { margin: 0 0 18px; font-size: 14px; }
   .backlink a { color: #888; text-decoration: none; }
   @media print { .backlink { display: none; } }
