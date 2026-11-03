@@ -22,6 +22,20 @@ set to an empty string in `site.json`, or preview it on GitHub Pages:
 python3 -m http.server --directory _site 8000
 ```
 
+## Two Generated Pages
+
+**`src/manual.html` and `src/guide.html` are generated. Do not edit them here.** They are
+exported from the app repository's `docs/manual.html` and `docs/user-guide.html` by
+`Scripts/publish-docs.py` there, which puts the site's own additions back - the product name as
+a placeholder, the backlink, the guide's `noindex`, and the pictures as lazily loaded JPEGs under
+`assets/img/guide/`.
+
+There were two copies of each and no tool, so they diverged: the app's manual was brought up to
+date on 28 October 2026 and the published one still said September, which is how it was found. An
+edit made here is lost at the next export, and an edit made there reaches the site when somebody
+runs the script. `./Scripts/publish-docs.py --check` in the app repository says whether the
+published copies have fallen behind, and writes nothing.
+
 ## Change the Product Name, Links or Launch State
 
 Everything that changes between now and launch lives in `site.json`:
