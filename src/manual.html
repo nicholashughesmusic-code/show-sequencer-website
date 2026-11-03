@@ -1357,12 +1357,13 @@
   <p class="lede">Band members' own phones and tablets can show the current song's lyric-and-chord
   chart, or their own page of the score. Read only. Nothing on a stand can touch the show.</p>
 
-  <div class="warn"><b>One piece is still missing.</b> Everything else works: importing a chart and
-  PDF parts, a chart or score column in the import grid, serving them, a stand that follows the
-  armed song, a Stands line on Settings' Network area, and <b>timing a chart</b> by tapping along
-  once while the song plays, after which it scrolls itself on every stand. What is not built is
-  <b>automatic page turns</b> for a score: those are still turned by hand, by swipe, or by a
-  page-turner pedal.</div>
+  <div class="note"><b>A score can scroll itself.</b> The app reads a part's own bar numbers out
+  of the PDF - a Sibelius export writes them as text, not as a picture - and ties them to the
+  song's click, so the music moves under the reader while it plays. Nothing is set up: every part
+  of a song is read in one pass the next time the show is stopped. A part with no bar numbers
+  printed on it, such as a scan, is the exception, and its page turns can be tapped in once
+  instead. Auto-scroll needs the song's metronome to have been analysed, because that is what
+  turns a bar into a moment.</div>
 
   <h3>Scores: the stand inside the app</h3>
   <p>A band member with {{productName}} on their own iPad or phone does not have to type an address at all.
@@ -1376,15 +1377,26 @@
     somebody arriving at a stand on a song their instrument sits out is still offered the part they
     will need in four songs' time. The chart sits at the top of the same list, because to the person
     holding the stand it is the same question.</li>
-    <li><b>Following</b> changes the song, not the page. The band moving to song seven puts song
-    seven's part on every stand; the pages inside it are still turned by hand, because this build
-    writes no page-turn cues. A <b>timed chart</b> is the exception and scrolls itself.</li>
-    <li><b>Turn a page</b> with a tap on the right or left third, or a swipe - left and up go on,
-    right and down go back, which is what a continuous scroll of stacked pages would have done.</li>
-    <li><b>Tap the middle</b> to hide the top and bottom bars, and again to bring them back. While
-    you are following a playing show they are hidden anyway and a tap shows them for a few seconds;
-    the rest of the time a hide stays hidden, because reading ahead between songs is exactly when
-    the bars are in the way.</li>
+    <li><b>Three modes</b>, chosen top right: <b>Manual</b> moves nothing by itself and is where
+    a stand opens; <b>Follow set</b> changes the song with the running order and leaves the pages
+    to you; <b>Auto-scroll</b> moves the music itself while the song plays. The names say what
+    each one follows - the set picks the song, the song moves the music - so the two automatic
+    ones cannot be read as each other.</li>
+    <li><b>Auto-scroll</b> draws the whole part as one continuous scroll with the music a third
+    of the way down, and a hand scroll wins while you are touching it and for five seconds after.
+    It is offered only where the part can say where its music is, and says why where it cannot.
+    A <b>timed chart</b> has always scrolled itself and still does.</li>
+    <li><b>The bar number you are on</b> carries a soft mark, so somebody who looks up can find
+    their place again. It moves once per system rather than with the beat - deliberately, because
+    a mark that followed the beat would be a bouncing ball, and the music itself is never
+    coloured or drawn over.</li>
+    <li><b>Turn a page</b> with a swipe - left and up go on, right and down go back, which is
+    what a continuous scroll of stacked pages would have done. The chevrons either side of
+    <b>Page 1 of 6</b> turn it too, while the bars are up.</li>
+    <li><b>Tap anywhere on the music</b> to hide the top and bottom bars, and again to bring them
+    back. While you are following a playing show they are hidden anyway and a tap shows them for a
+    few seconds; the rest of the time a hide stays hidden, because reading ahead between songs is
+    exactly when the bars are in the way.</li>
     <li><b>Pinch</b> to zoom up to four times and drag to move about. A page fits whole by default,
     which is what a stand shows; an upright phone leaves about a third of the screen unused, and
     this is what that third is for.</li>
