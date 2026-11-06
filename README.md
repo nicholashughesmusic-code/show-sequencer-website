@@ -41,7 +41,7 @@ published copies have fallen behind, and writes nothing.
 Everything that changes between now and launch lives in `site.json`:
 
 - `productName` and `productIsWorkingName`: the product's name everywhere on the site
-- `betaFormUrl`, `updatesFormUrl`, `manualUrl`, `contactEmail`: shown only once set
+- `updatesFormUrl`, `manualUrl`, `contactEmail`: shown only once set
 - `launched`: while `false`, every page carries `noindex`, `robots.txt` blocks crawlers and a
   preview banner shows
 - `siteUrl`: set to the custom domain (for example `https://show-arts.com`) to write the `CNAME` file
