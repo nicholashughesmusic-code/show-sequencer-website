@@ -7,9 +7,9 @@
       <h1>Your show doesn't need <em>a laptop.</em></h1>
       <div class="strap">Audio. Click. MIDI. Video. Lights.<span class="one">One iPad.</span></div>
       <div class="ctas">
-        <a class="btn primary" href="#how">See how it works</a>
+        {{#if launched}}<a class="btn primary" href="{{appStoreUrl}}">Download on the App Store</a><a class="btn ghost" href="#how">See how it works</a>{{/if}}{{#unless launched}}<a class="btn primary" href="#how">See how it works</a>{{/unless}}
       </div>
-      <p class="fine">Coming soon to iPad and iPhone.</p>
+      {{#if launched}}<p class="fine">On the App Store for iPad and iPhone. Free for 28 days, then one purchase.</p>{{/if}}{{#unless launched}}<p class="fine">Coming soon to iPad and iPhone.</p>{{/unless}}
     </div>
     <figure class="device-wrap duo">
       <div class="pair">
@@ -134,10 +134,10 @@
 <section class="band">
   <div class="wrap final">
     <div class="card">
-      <div class="eyebrow">Coming soon</div>
+      <div class="eyebrow">{{#if launched}}Out now{{/if}}{{#unless launched}}Coming soon{{/unless}}</div>
       <h2>Try it properly first.</h2>
-      <p>Free for 28 days when it arrives, then one purchase. No subscription.</p>
-      <div class="ctas"><a class="btn primary" href="{{basePath}}/contact/">Get in touch</a></div>
+      <p>{{#if launched}}Free for 28 days, then one purchase. No subscription.{{/if}}{{#unless launched}}Free for 28 days when it arrives, then one purchase. No subscription.{{/unless}}</p>
+      <div class="ctas">{{#if launched}}<a class="btn primary" href="{{appStoreUrl}}">Download on the App Store</a>{{/if}}{{#unless launched}}<a class="btn primary" href="{{basePath}}/contact/">Get in touch</a>{{/unless}}</div>
     </div>
     <div class="card">
       <div class="eyebrow">In the meantime</div>
