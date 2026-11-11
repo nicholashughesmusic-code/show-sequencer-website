@@ -140,7 +140,7 @@
       <div class="ctas">{{#if launched}}<a class="btn primary" href="{{appStoreUrl}}">Download on the App Store</a>{{/if}}{{#unless launched}}<a class="btn primary" href="{{basePath}}/contact/">Get in touch</a>{{/unless}}</div>
     </div>
     <div class="card">
-      <div class="eyebrow">In the meantime</div>
+      <div class="eyebrow">{{#if launched}}Stay in touch{{/if}}{{#unless launched}}In the meantime{{/unless}}</div>
       <h3>Get product updates</h3>
       {{#if updatesFormUrl}}<p>Occasional news, no more than monthly. Unsubscribe any time.</p><div class="ctas"><a class="btn ghost" href="{{updatesFormUrl}}">Sign up</a></div>{{/if}}
       {{#unless updatesFormUrl}}<p>The updates list opens soon.</p>{{/unless}}
