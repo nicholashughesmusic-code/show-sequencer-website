@@ -1,0 +1,35 @@
+<!-- title: Release notes - {{productName}} | description: What changed in each version of {{productName}}, newest first. -->
+{{> head}}
+<div class="wrap page-head">
+  <div class="eyebrow">{{productName}}</div>
+  <h1 style="font-size:clamp(44px,7vw,88px)">Release notes</h1>
+</div>
+<div class="wrap prose">
+  <p class="lead">What changed in each version of {{productNameTM}}, newest first. Updates arrive through the App Store, and everything you have built stays on your iPad when you update.</p>
+
+  <h2 id="v1-0-1">Version 1.0.1</h2>
+  <p class="muted">11 November 2026</p>
+  <p>Fixes the screenshots on the App Store page, which appeared rotated on iPad. Nothing in the app itself changed.</p>
+
+  <h2 id="v1-0">Version 1.0</h2>
+  <p class="muted">9 November 2026</p>
+  <p>The first release. Audio, click, MIDI, video and lights, run from one iPad.</p>
+  <ul>
+    <li>Multitrack backing tracks, up to 16 per song, each sent to any output on your audio interface</li>
+    <li>A separate mix for every output, so front of house, monitors and in-ears each hear what they need. The click can go to the drummer's ears and nowhere else</li>
+    <li>Setlists with songs that wait for you or run straight into the next, and gaps where you want them</li>
+    <li>Showtime: a big Play bar, cue the next song and play it, with the setlist and the state of your rig in view</li>
+    <li>Video and lighting lined up against the audio in one window, frame by frame, with undo and Save</li>
+    <li>MIDI patch changes on time with the song</li>
+    <li>A Line Check before the show, covering audio, screen, MIDI and lights, with a link to fix anything that needs it</li>
+    <li>Charts and lyrics that follow the song, and a stand page that shows every player their part on their own device, with nothing to install</li>
+    <li>A phone remote to play, stop, cue and mix from anywhere on the stage</li>
+    <li>Import whole folders of songs at once, and rename and route many songs in one grid</li>
+    <li>Runs on iPhone too, and upright on iPad if you prefer</li>
+    <li>Back up the whole rig to one file</li>
+    <li>Free for 28 days, then one purchase. No subscription</li>
+  </ul>
+
+  {{#if launched}}<div class="ctas"><a class="btn primary" href="{{appStoreUrl}}">Download on the App Store</a></div>{{/if}}
+</div>
+{{> foot}}
